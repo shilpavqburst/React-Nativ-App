@@ -55,7 +55,12 @@ const arr = [
     basetext: '75 items',
     img2: require('./src/assets/images/listarrow_icn.png'),
   },
-
+  {
+    title: 'speakers',
+    img: require('./src/assets/images/speaker_icn.png'),
+    basetext: '75 items',
+    img2: require('./src/assets/images/listarrow_icn.png'),
+  },
   {
     title: 'calculator',
     img: require('./src/assets/images/calc_icn.png'),

@@ -16,6 +16,12 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* DemoProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DemoProjectTests.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		FE246F290B0849ADBCD531C9 /* bariol_light-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E314F879750040B5AEC3CC5A /* bariol_light-webfont.ttf */; };
+		FB86835CFE5D4CA78A8DEF17 /* bariol_regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAFCA72B87B8457EBF1E0B05 /* bariol_regular-webfont.ttf */; };
+		7CC7D2EDAA5F4BB68FF8D499 /* bariol-light-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83A30053065541E58185FE53 /* bariol-light-webfont.ttf */; };
+		A7B70E8A408F4AA3B708853F /* bariol-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4717BAF3E5CD47C8A7B68ACB /* bariol-regular-webfont.ttf */; };
+		DDBF9BA2B303425F9450CBDE /* Cute-Little-Sheep.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B21C3DB4C494201A84702BA /* Cute-Little-Sheep.ttf */; };
+		0BE5FD8F75DA4F78A547168C /* Cute Little Sheep.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D738EBAAF7B04054BFA482D1 /* Cute Little Sheep.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +57,12 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = DemoProject/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		E314F879750040B5AEC3CC5A /* bariol_light-webfont.ttf */ = {isa = PBXFileReference; name = "bariol_light-webfont.ttf"; path = "../src/assets/fonts/bariol_light-webfont.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FAFCA72B87B8457EBF1E0B05 /* bariol_regular-webfont.ttf */ = {isa = PBXFileReference; name = "bariol_regular-webfont.ttf"; path = "../src/assets/fonts/bariol_regular-webfont.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		83A30053065541E58185FE53 /* bariol-light-webfont.ttf */ = {isa = PBXFileReference; name = "bariol-light-webfont.ttf"; path = "../src/assets/fonts/bariol-light-webfont.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4717BAF3E5CD47C8A7B68ACB /* bariol-regular-webfont.ttf */ = {isa = PBXFileReference; name = "bariol-regular-webfont.ttf"; path = "../src/assets/fonts/bariol-regular-webfont.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8B21C3DB4C494201A84702BA /* Cute-Little-Sheep.ttf */ = {isa = PBXFileReference; name = "Cute-Little-Sheep.ttf"; path = "../src/assets/fonts/Cute-Little-Sheep.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D738EBAAF7B04054BFA482D1 /* Cute Little Sheep.ttf */ = {isa = PBXFileReference; name = "Cute Little Sheep.ttf"; path = "../src/assets/fonts/Cute Little Sheep.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +152,7 @@
 				00E356EF1AD99517003FC87E /* DemoProjectTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				81276C25B7AE44DD84630421 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -156,6 +169,20 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		81276C25B7AE44DD84630421 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				E314F879750040B5AEC3CC5A /* bariol_light-webfont.ttf */,
+				FAFCA72B87B8457EBF1E0B05 /* bariol_regular-webfont.ttf */,
+				83A30053065541E58185FE53 /* bariol-light-webfont.ttf */,
+				4717BAF3E5CD47C8A7B68ACB /* bariol-regular-webfont.ttf */,
+				8B21C3DB4C494201A84702BA /* Cute-Little-Sheep.ttf */,
+				D738EBAAF7B04054BFA482D1 /* Cute Little Sheep.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -295,6 +322,12 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				FE246F290B0849ADBCD531C9 /* bariol_light-webfont.ttf in Resources */,
+				FB86835CFE5D4CA78A8DEF17 /* bariol_regular-webfont.ttf in Resources */,
+				7CC7D2EDAA5F4BB68FF8D499 /* bariol-light-webfont.ttf in Resources */,
+				A7B70E8A408F4AA3B708853F /* bariol-regular-webfont.ttf in Resources */,
+				DDBF9BA2B303425F9450CBDE /* Cute-Little-Sheep.ttf in Resources */,
+				0BE5FD8F75DA4F78A547168C /* Cute Little Sheep.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
