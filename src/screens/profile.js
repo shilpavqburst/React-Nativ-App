@@ -37,6 +37,30 @@ const arr = [
     basetext: ' kochi, kerala ',
     img2: require('./src/assets/images/listarrow_icn.png'),
   },
+  {
+    title: ' audio engine a2+ speakers ',
+    img: require('./src/assets/images/speaker2.jpg'),
+    basetext: ' kochi, kerala ',
+    img2: require('./src/assets/images/listarrow_icn.png'),
+  },
+  {
+    title: ' imac 4k display ',
+    img: require('./src/assets/images/apple_pc.jpg'),
+    basetext: ' kochi, kerala ',
+    img2: require('./src/assets/images/listarrow_icn.png'),
+  },
+  {
+    title: ' apple air + camera ',
+    img: require('./src/assets/images/camera.jpg'),
+    basetext: ' kochi, kerala ',
+    img2: require('./src/assets/images/listarrow_icn.png'),
+  },
+  {
+    title: ' puma shoes ',
+    img: require('./src/assets/images/shoe.jpg'),
+    basetext: ' kochi, kerala ',
+    img2: require('./src/assets/images/listarrow_icn.png'),
+  },
 ];
 
 const App = () => {
@@ -89,16 +113,14 @@ const App = () => {
         </Text>
       </View>
       <ScrollView
-        contentContainerStyle={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          top: 220,
+        style={{
+          marginTop: 220,
           // paddingTop: 230,
           // flex: 1,
-          backgroundColor: '#000000',
+          backgroundColor: '#000',
         }}>
         {arr.map((itm, indx) => (
-          <View style={styles.box}>
+          <View style={styles.box} key={indx}>
             <View
               style={{
                 width: 50,

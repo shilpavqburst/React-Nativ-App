@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+// import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
@@ -15,6 +16,8 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+
+// import com.reactnative.picker.PickerPackage; // import package 
 // import com.facebook.reactnative.androidsdk.FBSDKPackage;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -31,7 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add( new FBSDKPackage());
+          // packages.add( new PickerPackage());
           return packages;
         }
 
