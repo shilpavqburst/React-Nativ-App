@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Switch, TouchableOpacity} from 'react-native';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 import ImagePicker from 'react-native-image-crop-picker';
 
@@ -16,7 +15,7 @@ import {
   ImageBackground,
 } from 'react-native';
 
-const App = () => {
+const Create_Ad = () => {
   const [isEnabled1, setIsEnabled1] = useState(false);
   const toggleSwitch1 = () => setIsEnabled1((previousState) => !previousState);
   const [imageSRC, setImageSRC] = useState([]);
@@ -43,7 +42,7 @@ const App = () => {
       <View style={styles.container}></View>
       <ImageBackground
         style={styles.bg}
-        source={require('./src/assets/images/bg.png')}>
+        source={require('../assets/images/bg.png')}>
         <Text
           style={{
             color: '#98817b',
@@ -73,7 +72,7 @@ const App = () => {
             <TouchableOpacity onPress={takePhotoFromGallery}>
               <Image
                 style={[styles.logo]}
-                source={require('./src/assets/images/addimage_icn.png')}
+                source={require('../assets/images/addimage_icn.png')}
               />
             </TouchableOpacity>
           )}
@@ -176,9 +175,9 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginLeft: 30,
     height: 40,
-    width: 300,
-    borderWidth: 0.1,
-    borderColor: '#000000',
+    width: '85%',
+    borderWidth: 1,
+    borderColor: '#f3e6df',
     borderRadius: 20,
     backgroundColor: '#FFFFFF',
     fontFamily: 'bariol_light-webfont',
@@ -194,7 +193,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginLeft: 30,
     height: 40,
-    width: 300,
+    width: '85%',
     borderWidth: 0.1,
     top: 20,
     borderColor: '#000000',
@@ -207,7 +206,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginLeft: 30,
     height: 40,
-    width: 260,
+    width: '70%',
 
     backgroundColor: '#FFFFFF',
     fontFamily: 'bariol_light-webfont',
@@ -222,4 +221,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Create_Ad;

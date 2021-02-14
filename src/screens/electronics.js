@@ -100,7 +100,7 @@ const App = () => {
               <Image source={itm.img} style={{}} />
             </View>
 
-            <View style={{width: 260, padding: 15}}>
+            <View style={{width: 290, padding: 15}}>
               <Text
                 style={{
                   color: '#98817b',

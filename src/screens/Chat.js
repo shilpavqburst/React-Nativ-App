@@ -20,44 +20,48 @@ import {Header} from 'react-native/Libraries/NewAppScreen';
 const arr = [
   {
     title: 'Sandra Adams',
-    img: require('./src/assets/images/avatar1.png'),
+    img: require('../assets/images/avatar1.png'),
     basetext: "Can't wait to see you!",
   },
 
   {
     title: 'Andrew Jill',
-    img: require('./src/assets/images/avatar2.png'),
+    img: require('../assets/images/avatar2.png'),
     basetext: "Can't wait to see you!",
   },
   {
     title: 'Ria Shah',
-    img: require('./src/assets/images/avatar3.png'),
+    img: require('../assets/images/avatar3.png'),
     basetext: "Can't wait to see you!",
   },
   {
     title: 'Andrew Jill',
-    img: require('./src/assets/images/avatar4.png'),
+    img: require('../assets/images/avatar4.png'),
     basetext: "Can't wait to see you!",
   },
   {
     title: 'Jimmy James',
-    img: require('./src/assets/images/avatar5.png'),
+    img: require('../assets/images/avatar5.png'),
     basetext: "Can't wait to see you!",
   },
   {
     title: 'Sara Toole',
-    img: require('./src/assets/images/avatar6.png'),
+    img: require('../assets/images/avatar6.png'),
     basetext: "Can't wait to see you!",
   },
 ];
 
-const App = () => {
+const Chat = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="dark-content" />
+      <Image
+        source={require('../assets/images/bg.png')}
+        style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}
+      />
 
       <ScrollView
-        style={{backgroundColor: '#e8e8e8'}}
+        style={{backgroundColor: '#00000000'}}
         contentContainerStyle={{
           flexDirection: 'column',
           flexWrap: 'wrap',
@@ -69,8 +73,7 @@ const App = () => {
               style={{
                 width: 50,
                 height: 50,
-                //borderRightWidth: 0.5,
-                //borderColor: '#C1C1C1',
+
                 justifyContent: 'center',
               }}>
               <Image source={itm.img} style={{height: 50, width: 50}} />
@@ -120,4 +123,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Chat;

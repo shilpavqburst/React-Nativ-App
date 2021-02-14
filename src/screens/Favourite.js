@@ -1,5 +1,4 @@
 import React from 'react';
-import {LoginButton, AccessToken} from 'react-native-fbsdk';
 import {
   SafeAreaView,
   StyleSheet,
@@ -20,64 +19,64 @@ import {Header} from 'react-native/Libraries/NewAppScreen';
 const arr = [
   {
     title: 'puma white leather bag',
-    img: require('./src/assets/images/bag.jpg'),
+    img: require('../assets/images/bag.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
-    img2: require('./src/assets/images/time_ICN2.png'),
-    time: '07:30 pm',
+    img2: require('../assets/images/time_ICN2.png'),
+    time: '\t07:30 pm',
   },
 
   {
     title: 'diamond ring with platinum',
-    img: require('./src/assets/images/ring.jpg'),
+    img: require('../assets/images/ring.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 13500',
-    img2: require('./src/assets/images/time_ICN1.png'),
-    time: '09:30 pm',
+    img2: require('../assets/images/time_ICN1.png'),
+    time: '\t09:30 pm',
   },
   {
     title: 'ghostly enemelware mug',
-    img: require('./src/assets/images/mug.jpg'),
+    img: require('../assets/images/mug.jpg'),
     basetext: 'alzoor, karnataka',
     price: '\u20B9 75000',
-    img2: require('./src/assets/images/time_ICN.png'),
-    time: '10:00 pm',
+    img2: require('../assets/images/time_ICN.png'),
+    time: '\t10:00 pm',
   },
   {
     title: 'audio engine - xb03',
-    img: require('./src/assets/images/speaker7.jpg'),
+    img: require('../assets/images/speaker7.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 45000',
-    img2: require('./src/assets/images/date_ICN1.png'),
-    time: '28/06/16',
+    img2: require('../assets/images/date_ICN1.png'),
+    time: '\t28/06/16',
   },
   {
     title: 'movado circa analogue watch',
-    img: require('./src/assets/images/watch.jpg'),
+    img: require('../assets/images/watch.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 9500',
-    img2: require('./src/assets/images/date_ICN.png'),
-    time: '28/06/16',
+    img2: require('../assets/images/date_ICN.png'),
+    time: '\t28/06/16',
   },
   {
     title: 'apple m2xc/a usb cable',
-    img: require('./src/assets/images/headphone.jpg'),
+    img: require('../assets/images/headphone.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
-    img2: require('./src/assets/images/time_ICN.png'),
-    time: '07:00 pm',
+    img2: require('../assets/images/time_ICN.png'),
+    time: '\t07:00 pm',
   },
   {
     title: 'earbuds bts',
-    img: require('./src/assets/images/earbuds.jpg'),
+    img: require('../assets/images/earbuds.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 50000',
-    img2: require('./src/assets/images/time_ICN.png'),
-    time: '10:00 pm',
+    img2: require('../assets/images/time_ICN.png'),
+    time: '\t10:00 pm',
   },
 ];
 
-const App = () => {
+const Favourite = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="dark-content" />
@@ -102,7 +101,7 @@ const App = () => {
               <Image source={itm.img} style={{height: 80, width: 80}} />
             </View>
 
-            <View style={{width: 290, paddingLeft: 40}}>
+            <View style={{width: '75%', paddingLeft: 40}}>
               <Text
                 style={{
                   color: '#98817b',
@@ -128,13 +127,13 @@ const App = () => {
                 {itm.price}
               </Text>
             </View>
-            <View style={{flexDirection: 'row', top: 30}}>
-              <Image source={itm.img2} />
+            <View style={{flexDirection: 'row', top: 30, marginLeft: -30}}>
+              <Image style={{top: 3}} source={itm.img2} />
               <Text
                 style={{
-                  color: '#FF7F50',
+                  color: '#98817b',
                   fontFamily: 'bariol_regular-webfont',
-                  fontSize: 20,
+                  fontSize: 14,
                 }}>
                 {itm.time}
               </Text>
@@ -165,4 +164,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Favourite;

@@ -38,7 +38,7 @@ const App = () => {
 
       <Swiper
         style={{
-          backgroundColor: 'red',
+          backgroundColor: '#FFFFFF',
           marginBottom: 20,
           //top: 90,
         }}>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     height: 300,
     width: '100%',
-    backgroundColor: 'red',
+    backgroundColor: '#FFFFFF',
   },
 
   small: {
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     color: '#98817b',
   },
   big: {
-    fontSize: 22,
+    fontSize: 24,
     fontFamily: 'bariol_regular-webfont',
     color: '#98817b',
   },

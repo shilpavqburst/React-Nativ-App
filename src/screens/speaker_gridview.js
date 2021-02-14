@@ -1,5 +1,4 @@
 import React from 'react';
-import {LoginButton, AccessToken} from 'react-native-fbsdk';
 import {
   SafeAreaView,
   StyleSheet,
@@ -19,49 +18,49 @@ import {Header} from 'react-native/Libraries/NewAppScreen';
 
 const arr = [
   {
-    title: 'mobiles',
+    title: 'Kenwood Mini… ',
     img: require('./src/assets/images/speaker1.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
   },
   {
-    title: 'real estate',
+    title: 'Devialet Phantom… ',
     img: require('./src/assets/images/speaker2.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
   },
   {
-    title: 'electronics',
+    title: 'Polk Audio LSiM… ',
     img: require('./src/assets/images/speaker3.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
   },
   {
-    title: 'leisure',
+    title: 'Audio Engine… ',
     img: require('./src/assets/images/speaker4.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
   },
   {
-    title: 'appliances',
+    title: 'bowerswilkins…',
     img: require('./src/assets/images/speaker5.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
   },
   {
-    title: 'automotive',
+    title: 'philips…',
     img: require('./src/assets/images/speaker6.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
   },
   {
-    title: 'pets',
+    title: 'Audio Engine…',
     img: require('./src/assets/images/speaker1.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
   },
   {
-    title: 'sports',
+    title: 'Audio Engine…',
     img: require('./src/assets/images/speaker1.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
@@ -83,36 +82,55 @@ const App = () => {
         {arr.map((itm, indx) => (
           <View style={styles.box}>
             <View>
-              <Image
+              <ImageBackground
                 source={itm.img}
-                style={{marginBottom: 5, height: 165, width: 165}}
-              />
-            </View>
-            <View
-              style={{width: 290, paddingLeft: 40, backgroundColor: '#808080'}}>
-              <Text
                 style={{
-                  color: '#000000',
-                  fontFamily: 'bariol_regular-webfont',
+                  //marginBottom: 5,
+                  // height: 185,
+                  width: '100%',
                 }}>
-                {itm.title}
-              </Text>
-              <Text
-                style={{
-                  color: '#98817b',
-                  fontFamily: 'bariol_regular-webfont',
-                  fontSize: 14,
-                }}>
-                {itm.basetext}
-              </Text>
-              <Text
-                style={{
-                  color: '#FF7F50',
-                  fontFamily: 'bariol_regular-webfont',
-                  fontSize: 20,
-                }}>
-                {itm.price}
-              </Text>
+                <View
+                  style={{
+                    width: '100%',
+                    paddingLeft: 45,
+                    backgroundColor: '#1d1d1d',
+                    marginTop: 145,
+                    //bottom: 20,
+                    //marginLeft: 5,
+                    height: 40,
+                  }}>
+                  <Text
+                    style={{
+                      color: '#FFFFFF',
+                      fontFamily: 'bariol_regular-webfont',
+                      fontSize: 14,
+                      marginLeft: -30,
+                      top: 5,
+                    }}>
+                    {itm.title}
+                  </Text>
+                  <Text
+                    style={{
+                      color: '#FFFFFF',
+                      fontFamily: 'bariol_regular-webfont',
+                      fontSize: 12,
+                      marginLeft: -30,
+                      top: 5,
+                    }}>
+                    {itm.basetext}
+                  </Text>
+                  <Text
+                    style={{
+                      color: '#FF7F50',
+                      fontFamily: 'bariol_regular-webfont',
+                      fontSize: 14,
+                      marginLeft: 90,
+                      bottom: 20,
+                    }}>
+                    {itm.price}
+                  </Text>
+                </View>
+              </ImageBackground>
             </View>
           </View>
         ))}
@@ -129,8 +147,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   box: {
-    width: 168,
-    height: 168,
+    width: '47%',
+    height: 185,
     alignItems: 'center',
     margin: 4,
     backgroundColor: '#FFFFFF',

@@ -1,71 +1,63 @@
 import React from 'react';
-import {LoginButton, AccessToken} from 'react-native-fbsdk';
 import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
   Text,
-  Link,
-  TextInput,
   StatusBar,
   Image,
-  ImageBackground,
-  Button,
-  TouchableOpacity,
-  TouchableNativeFeedback,
 } from 'react-native';
-import {Header} from 'react-native/Libraries/NewAppScreen';
 
 const arr = [
   {
     title: 'kenwood mini speakers',
-    img: require('./src/assets/images/speaker1.jpg'),
+    img: require('../assets/images/speaker1.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
-    img2: require('./src/assets/images/time_ICN2.png'),
-    time: '07:30 pm',
+    img2: require('../assets/images/time_ICN2.png'),
+    time: '\t07:30 pm',
   },
 
   {
     title: 'devialet phantom wireless',
-    img: require('./src/assets/images/speaker2.jpg'),
+    img: require('../assets/images/speaker2.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 13500',
-    img2: require('./src/assets/images/time_ICN1.png'),
-    time: '09:30 pm',
+    img2: require('../assets/images/time_ICN1.png'),
+    time: '\t09:30 pm',
   },
   {
     title: 'polk audio lsim 705',
-    img: require('./src/assets/images/speaker3.jpg'),
+    img: require('../assets/images/speaker3.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 17000',
-    img2: require('./src/assets/images/time_ICN.png'),
-    time: '10:00 pm',
+    img2: require('../assets/images/time_ICN.png'),
+    time: '\t10:00 pm',
   },
   {
     title: 'audio engine a2+',
-    img: require('./src/assets/images/speaker4.jpg'),
+    img: require('../assets/images/speaker4.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 45000',
-    img2: require('./src/assets/images/date_ICN1.png'),
-    time: '28/06/16',
+    img2: require('../assets/images/date_ICN1.png'),
+    time: '\t28/06/16',
   },
   {
     title: 'bowerswilkins - dm602',
-    img: require('./src/assets/images/speaker5.jpg'),
+    img: require('../assets/images/speaker5.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 9500',
-    img2: require('./src/assets/images/date_ICN.png'),
-    time: '28/06/16',
+    img2: require('../assets/images/date_ICN.png'),
+    time: '\t28/06/16',
   },
   {
     title: 'philips multi speakers',
-    img: require('./src/assets/images/speaker6.jpg'),
+    img: require('../assets/images/speaker6.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 50000',
-    img2: require('./src/assets/images/time_ICN.png'),
-    time: '10:00 pm',
+    img2: require('../assets/images/time_ICN.png'),
+    time: '\t10:00 pm',
   },
 ];
 
@@ -81,7 +73,7 @@ const App = () => {
           flexWrap: 'wrap',
           paddingTop: 100,
         }}>
-        {arr.map((itm, indx) => (
+        {arr.map((itm) => (
           <View style={styles.box}>
             <View
               style={{
@@ -94,7 +86,7 @@ const App = () => {
               <Image source={itm.img} style={{height: 80, width: 80}} />
             </View>
 
-            <View style={{width: 290, paddingLeft: 40}}>
+            <View style={{width: 255, paddingLeft: 40}}>
               <Text
                 style={{
                   color: '#98817b',
@@ -120,13 +112,13 @@ const App = () => {
                 {itm.price}
               </Text>
             </View>
-            <View style={{flexDirection: 'row', top: 30}}>
-              <Image source={itm.img2} />
+            <View style={{flexDirection: 'row', top: 35}}>
+              <Image style={{top: 3}} source={itm.img2} />
               <Text
                 style={{
-                  color: '#FF7F50',
+                  color: '#98817b',
                   fontFamily: 'bariol_regular-webfont',
-                  fontSize: 20,
+                  fontSize: 14,
                 }}>
                 {itm.time}
               </Text>

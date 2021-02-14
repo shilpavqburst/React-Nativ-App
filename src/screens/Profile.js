@@ -15,55 +15,55 @@ import {
 const arr = [
   {
     title: ' audio engine a2+ speakers ',
-    img: require('./src/assets/images/speaker2.jpg'),
+    img: require('../assets/images/speaker2.jpg'),
     basetext: ' kochi, kerala ',
-    img2: require('./src/assets/images/listarrow_icn.png'),
+    img2: require('../assets/images/listarrow_icn.png'),
   },
   {
     title: ' imac 4k display ',
-    img: require('./src/assets/images/apple_pc.jpg'),
+    img: require('../assets/images/apple_pc.jpg'),
     basetext: ' kochi, kerala ',
-    img2: require('./src/assets/images/listarrow_icn.png'),
+    img2: require('../assets/images/listarrow_icn.png'),
   },
   {
     title: ' apple air + camera ',
-    img: require('./src/assets/images/camera.jpg'),
+    img: require('../assets/images/camera.jpg'),
     basetext: ' kochi, kerala ',
-    img2: require('./src/assets/images/listarrow_icn.png'),
+    img2: require('../assets/images/listarrow_icn.png'),
   },
   {
     title: ' puma shoes ',
-    img: require('./src/assets/images/shoe.jpg'),
+    img: require('../assets/images/shoe.jpg'),
     basetext: ' kochi, kerala ',
-    img2: require('./src/assets/images/listarrow_icn.png'),
+    img2: require('../assets/images/listarrow_icn.png'),
   },
   {
     title: ' audio engine a2+ speakers ',
-    img: require('./src/assets/images/speaker2.jpg'),
+    img: require('../assets/images/speaker2.jpg'),
     basetext: ' kochi, kerala ',
-    img2: require('./src/assets/images/listarrow_icn.png'),
+    img2: require('../assets/images/listarrow_icn.png'),
   },
   {
     title: ' imac 4k display ',
-    img: require('./src/assets/images/apple_pc.jpg'),
+    img: require('../assets/images/apple_pc.jpg'),
     basetext: ' kochi, kerala ',
-    img2: require('./src/assets/images/listarrow_icn.png'),
+    img2: require('../assets/images/listarrow_icn.png'),
   },
   {
     title: ' apple air + camera ',
-    img: require('./src/assets/images/camera.jpg'),
+    img: require('../assets/images/camera.jpg'),
     basetext: ' kochi, kerala ',
-    img2: require('./src/assets/images/listarrow_icn.png'),
+    img2: require('../assets/images/listarrow_icn.png'),
   },
   {
     title: ' puma shoes ',
-    img: require('./src/assets/images/shoe.jpg'),
+    img: require('../assets/images/shoe.jpg'),
     basetext: ' kochi, kerala ',
-    img2: require('./src/assets/images/listarrow_icn.png'),
+    img2: require('../assets/images/listarrow_icn.png'),
   },
 ];
 
-const App = () => {
+const Profile = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="dark-content" />
@@ -71,10 +71,10 @@ const App = () => {
       <View style={styles.container}></View>
       <ImageBackground
         style={styles.bg}
-        source={require('./src/assets/images/bg.png')}>
+        source={require('../assets/images/bg.png')}>
         <Image
           style={styles.logo}
-          source={require('./src/assets/images/profile_pic.png')}
+          source={require('../assets/images/profile_pic.png')}
         />
         <Text
           style={{
@@ -132,7 +132,7 @@ const App = () => {
               <Image source={itm.img} style={{height: 55, width: 55}} />
             </View>
 
-            <View style={{width: 260, padding: 15}}>
+            <View style={{width: 290, padding: 15}}>
               <Text
                 style={{
                   color: '#98817b',
@@ -208,4 +208,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Profile;
