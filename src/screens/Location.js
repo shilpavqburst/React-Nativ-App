@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import Swiper from 'react-native-swiper';
 
 import {
   SafeAreaView,
@@ -13,24 +12,6 @@ import {
   ImageBackground,
 } from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
-const arr = [
-  {
-    img: require('./src/assets/images/speaker2.jpg'),
-    amount: ' \t \t \t \u20B9 \n 45000',
-  },
-  {
-    img: require('./src/assets/images/phantom.jpg'),
-    amount: '\t \t \t \u20B9 \n 45000',
-  },
-  {
-    img: require('./src/assets/images/phantom2.jpg'),
-    amount: '\t \t \t \u20B9 \n 45000',
-  },
-  {
-    img: require('./src/assets/images/phantom3.jpg'),
-    amount: '\t \t \t \u20B9 \n 45000',
-  },
-];
 
 const App = () => {
   const [region, setRegion] = useState({

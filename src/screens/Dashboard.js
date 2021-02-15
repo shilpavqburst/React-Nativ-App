@@ -80,7 +80,7 @@ const arr = [
   },
 ];
 
-const Dashboard = () => {
+const Dashboard = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="dark-content" />
@@ -88,25 +88,42 @@ const Dashboard = () => {
         source={require('../assets/images/bg.png')}
         style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}
       />
+      <View style={styles.head}>
+        <Text
+          style={{
+            fontFamily: 'bariol_regular-webfont',
+            fontSize: 30,
+            color: 'rgba(255,121,86,1)',
+            //margin: 20,
+          }}>
+          dashboard
+        </Text>
+      </View>
       <ScrollView
         style={{backgroundColor: '#00000000'}}
         contentContainerStyle={{
           flexDirection: 'row',
           flexWrap: 'wrap',
-          paddingTop: 100,
+          paddingTop: 20,
         }}>
         {arr.map((itm, indx) => (
-          <View style={styles.box}>
-            <Image source={itm.img} style={{marginBottom: 5}} />
-            <Text
-              style={{
-                color: '#98817b',
-                fontFamily: 'bariol_regular-webfont',
-                fontSize: 17,
-              }}>
-              {itm.title}
-            </Text>
-          </View>
+          <TouchableNativeFeedback
+            key={indx}
+            onPress={() => {
+              navigation.navigate('Electronics');
+            }}>
+            <View style={styles.box}>
+              <Image source={itm.img} style={{marginBottom: 5}} />
+              <Text
+                style={{
+                  color: '#98817b',
+                  fontFamily: 'bariol_regular-webfont',
+                  fontSize: 17,
+                }}>
+                {itm.title}
+              </Text>
+            </View>
+          </TouchableNativeFeedback>
         ))}
       </ScrollView>
     </SafeAreaView>
@@ -119,6 +136,13 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
+  },
+  head: {
+    backgroundColor: '#FFFFFF',
+    height: 70,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   box: {
     width: '30%',

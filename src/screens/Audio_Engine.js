@@ -14,19 +14,19 @@ import {
 } from 'react-native';
 const arr = [
   {
-    img: require('./src/assets/images/speaker2.jpg'),
+    img: require('../assets/images/speaker2.jpg'),
     amount: ' \t \t \t \u20B9 \n 45000',
   },
   {
-    img: require('./src/assets/images/phantom.jpg'),
+    img: require('../assets/images/phantom.jpg'),
     amount: '\t \t \t \u20B9 \n 45000',
   },
   {
-    img: require('./src/assets/images/phantom2.jpg'),
+    img: require('../assets/images/phantom2.jpg'),
     amount: '\t \t \t \u20B9 \n 45000',
   },
   {
-    img: require('./src/assets/images/phantom3.jpg'),
+    img: require('../assets/images/phantom3.jpg'),
     amount: '\t \t \t \u20B9 \n 45000',
   },
 ];
@@ -35,11 +35,22 @@ const App = () => {
   return (
     <View style={{flex: 1}}>
       <StatusBar barStyle="dark-content" />
+      <View style={styles.head}>
+        <Text
+          style={{
+            fontFamily: 'bariol_regular-webfont',
+            fontSize: 30,
+            color: 'rgba(255,121,86,1)',
+            //margin: 20,
+          }}>
+          audio engine
+        </Text>
+      </View>
 
       <Swiper
         style={{
           backgroundColor: '#FFFFFF',
-          marginBottom: 20,
+          marginBottom: 30,
           //top: 90,
         }}>
         {arr.map((itm, indx) => (
@@ -47,12 +58,13 @@ const App = () => {
             <View
               style={{
                 width: '100%',
-                height: 250,
+                height: '100%',
                 justifyContent: 'center',
+                backgroundColor: 'red',
               }}>
               <ImageBackground
                 source={itm.img}
-                style={{height: 250, width: '100%', top: 90}}>
+                style={{height: 300, width: '100%', top: 100}}>
                 <View
                   style={{
                     width: 310,
@@ -79,8 +91,12 @@ const App = () => {
           </View>
         ))}
       </Swiper>
-      <View style={{flex: 1}}>
-        <View style={{flexDirection: 'column', marginLeft: 20}}>
+      <View>
+        <View
+          style={{
+            flexDirection: 'column',
+            marginLeft: 20,
+          }}>
           <Text style={styles.small}>product title</Text>
           <Text style={styles.big}>audio engine a2+ speakers</Text>
           <Text style={styles.small}>{'\n'}category</Text>
@@ -98,11 +114,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  head: {
+    backgroundColor: '#FFFFFF',
+    height: 70,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
   slideContainer: {
     // alignItems: 'center',
     // justifyContent: 'center',
-    height: 300,
+    height: 100,
     width: '100%',
     backgroundColor: '#FFFFFF',
   },

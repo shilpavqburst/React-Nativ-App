@@ -13,9 +13,10 @@ import {
   StatusBar,
   Image,
   ImageBackground,
+  TouchableNativeFeedback,
 } from 'react-native';
 
-const Create_Ad = () => {
+const Create_Ad = ({navigation}) => {
   const [isEnabled1, setIsEnabled1] = useState(false);
   const toggleSwitch1 = () => setIsEnabled1((previousState) => !previousState);
   const [imageSRC, setImageSRC] = useState([]);
@@ -43,11 +44,22 @@ const Create_Ad = () => {
       <ImageBackground
         style={styles.bg}
         source={require('../assets/images/bg.png')}>
+        <View style={styles.head}>
+          <Text
+            style={{
+              fontFamily: 'bariol_regular-webfont',
+              fontSize: 30,
+              color: 'rgba(255,121,86,1)',
+              //margin: 20,
+            }}>
+            create ad
+          </Text>
+        </View>
         <Text
           style={{
             color: '#98817b',
             fontSize: 18,
-            top: 90,
+            top: 20,
             marginLeft: 30,
             fontFamily: 'bariol_regular-webfont',
           }}>
@@ -57,14 +69,14 @@ const Create_Ad = () => {
           <View>
             <Image
               style={styles.logo}
-              source={require('./src/assets/images/addimage_icn.png')}
+              source={require('../assets/images/addimage_icn.png')}
             />
           </View>
         </TouchableOpacity>*/}
         <View
           style={{
             flexDirection: 'row',
-            marginTop: 100,
+            marginTop: 40,
             alignItems: 'center',
             marginLeft: 10,
           }}>
@@ -130,9 +142,12 @@ const Create_Ad = () => {
           placeholder="contact number"
           style={styles.TextInputStyleClass}
         />
-        <TouchableOpacity>
+        <TouchableNativeFeedback
+          onPress={() => {
+            navigation.navigate('Preview');
+          }}>
           <Text style={styles.button}>PREVIEW</Text>
-        </TouchableOpacity>
+        </TouchableNativeFeedback>
       </ScrollView>
     </SafeAreaView>
   );
@@ -149,6 +164,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: '100%',
+  },
+  head: {
+    backgroundColor: '#FFFFFF',
+    height: 70,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   logo: {
     width: 50,

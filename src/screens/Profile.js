@@ -72,6 +72,17 @@ const Profile = () => {
       <ImageBackground
         style={styles.bg}
         source={require('../assets/images/bg.png')}>
+        <View style={styles.head}>
+          <Text
+            style={{
+              fontFamily: 'bariol_regular-webfont',
+              fontSize: 30,
+              color: 'rgba(255,121,86,1)',
+              //margin: 20,
+            }}>
+            profile
+          </Text>
+        </View>
         <Image
           style={styles.logo}
           source={require('../assets/images/profile_pic.png')}
@@ -80,13 +91,14 @@ const Profile = () => {
           style={{
             color: '#98817b',
             fontSize: 18,
-            top: 110,
+            top: 30,
             marginLeft: 50,
             fontFamily: 'bariol_regular-webfont',
           }}>
           edit image
         </Text>
-        <View style={{flexDirection: 'column', marginLeft: 180}}>
+        <View
+          style={{flexDirection: 'column', marginLeft: 180, marginTop: -70}}>
           <Text style={styles.small}>username</Text>
           <Text style={styles.big}>jennifer smith</Text>
           <Text style={styles.small}>{'\n'}email id</Text>
@@ -172,10 +184,17 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  head: {
+    backgroundColor: '#FFFFFF',
+    height: 70,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   logo: {
     width: 70,
     height: 70,
-    top: 100,
+    top: 20,
     alignItems: 'center',
     marginLeft: 50,
   },

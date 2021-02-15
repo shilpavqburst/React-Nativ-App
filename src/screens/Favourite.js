@@ -80,13 +80,23 @@ const Favourite = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="dark-content" />
+      <View style={styles.head}>
+        <Text
+          style={{
+            fontFamily: 'bariol_regular-webfont',
+            fontSize: 30,
+            color: 'rgba(255,121,86,1)',
+            //margin: 20,
+          }}>
+          favourites
+        </Text>
+      </View>
 
       <ScrollView
         style={{backgroundColor: '#e8e8e8'}}
         contentContainerStyle={{
           flexDirection: 'column',
           flexWrap: 'wrap',
-          paddingTop: 100,
         }}>
         {arr.map((itm, indx) => (
           <View style={styles.box}>
@@ -151,6 +161,13 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
+  },
+  head: {
+    backgroundColor: '#FFFFFF',
+    height: 70,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   box: {
     width: '100%',

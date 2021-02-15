@@ -19,49 +19,49 @@ import {Header} from 'react-native/Libraries/NewAppScreen';
 const arr = [
   {
     title: 'Kenwood Mini… ',
-    img: require('./src/assets/images/speaker1.jpg'),
+    img: require('../assets/images/speaker1.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
   },
   {
     title: 'Devialet Phantom… ',
-    img: require('./src/assets/images/speaker2.jpg'),
+    img: require('../assets/images/speaker2.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
   },
   {
     title: 'Polk Audio LSiM… ',
-    img: require('./src/assets/images/speaker3.jpg'),
+    img: require('../assets/images/speaker3.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
   },
   {
     title: 'Audio Engine… ',
-    img: require('./src/assets/images/speaker4.jpg'),
+    img: require('../assets/images/speaker4.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
   },
   {
     title: 'bowerswilkins…',
-    img: require('./src/assets/images/speaker5.jpg'),
+    img: require('../assets/images/speaker5.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
   },
   {
     title: 'philips…',
-    img: require('./src/assets/images/speaker6.jpg'),
+    img: require('../assets/images/speaker6.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
   },
   {
     title: 'Audio Engine…',
-    img: require('./src/assets/images/speaker1.jpg'),
+    img: require('../assets/images/speaker1.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
   },
   {
     title: 'Audio Engine…',
-    img: require('./src/assets/images/speaker1.jpg'),
+    img: require('../assets/images/speaker1.jpg'),
     basetext: 'kochi, kerala',
     price: '\u20B9 12000',
   },
@@ -71,13 +71,23 @@ const App = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="dark-content" />
+      <View style={styles.head}>
+        <Text
+          style={{
+            fontFamily: 'bariol_regular-webfont',
+            fontSize: 30,
+            color: 'rgba(255,121,86,1)',
+            //margin: 20,
+          }}>
+          electronics
+        </Text>
+      </View>
 
       <ScrollView
         style={{backgroundColor: '#e8e8e8'}}
         contentContainerStyle={{
           flexDirection: 'row',
           flexWrap: 'wrap',
-          paddingTop: 180,
         }}>
         {arr.map((itm, indx) => (
           <View style={styles.box}>
@@ -145,6 +155,13 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
+  },
+  head: {
+    backgroundColor: '#FFFFFF',
+    height: 70,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   box: {
     width: '47%',

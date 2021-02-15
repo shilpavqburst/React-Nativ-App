@@ -14,16 +14,16 @@ import {
 
 const arr = [
   {
-    img: require('./src/assets/images/Bitmap_1.png'),
+    img: require('../assets/images/Bitmap_1.png'),
   },
   {
-    img: require('./src/assets/images/Bitmap_2.png'),
+    img: require('../assets/images/Bitmap_2.png'),
   },
   {
-    img: require('./src/assets/images/Bitmap_3.png'),
+    img: require('../assets/images/Bitmap_3.png'),
   },
   {
-    img: require('./src/assets/images/Bitmap_4.png'),
+    img: require('../assets/images/Bitmap_4.png'),
   },
 ];
 const arr1 = [
@@ -81,12 +81,23 @@ const App = () => {
       <View style={styles.container}></View>
       <ImageBackground
         style={styles.bg}
-        source={require('./src/assets/images/bg.png')}>
+        source={require('../assets/images/bg.png')}>
+        <View style={styles.head}>
+          <Text
+            style={{
+              fontFamily: 'bariol_regular-webfont',
+              fontSize: 30,
+              color: 'rgba(255,121,86,1)',
+              //margin: 20,
+            }}>
+            preview
+          </Text>
+        </View>
         <Text
           style={{
             color: '#98817b',
             fontSize: 18,
-            top: 90,
+            top: 20,
             marginLeft: 30,
             fontFamily: 'bariol_regular-webfont',
           }}>
@@ -95,7 +106,7 @@ const App = () => {
         <View
           style={{
             flexDirection: 'row',
-            marginTop: 100,
+            marginTop: 30,
 
             marginLeft: 20,
           }}>
@@ -170,6 +181,13 @@ const styles = StyleSheet.create({
     borderColor: '#000000',
     borderRadius: 20,
     backgroundColor: '#FF7F50',
+  },
+  head: {
+    backgroundColor: '#FFFFFF',
+    height: 70,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   images: {

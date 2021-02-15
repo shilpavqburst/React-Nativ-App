@@ -2,10 +2,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {Image} from 'react-native';
 import Chat from '../screens/Chat';
-import Dashboard from '../screens/Dashboard';
 import Favourite from '../screens/Favourite';
 import Profile from '../screens/Profile';
-import Create_Ad from '../screens/Create_Ad';
+import {CreateAdTab, DashbaordTab} from './StackNavigator';
 //import homeActive from '../assets/images/home_tabbar_active.png';
 //import homeInActive from '../assets/images/home_tabbar_normal.png';
 
@@ -21,9 +20,10 @@ function MyTabs() {
         inactiveBackgroundColor: 'rgba(248, 248, 248, 1)',
       }}>
       <Tab.Screen
-        name=" "
-        component={Dashboard}
+        name="Home"
+        component={DashbaordTab}
         options={{
+          tabBarLabel: '',
           tabBarIcon: ({focused}) => {
             if (focused)
               return (
@@ -43,9 +43,10 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="  "
+        name="Favourites"
         component={Favourite}
         options={{
+          tabBarLabel: '',
           tabBarIcon: ({focused}) => {
             if (focused)
               return (
@@ -65,9 +66,10 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="   "
-        component={Create_Ad}
+        name="Create Ad"
+        component={CreateAdTab}
         options={{
+          tabBarLabel: '',
           tabBarIcon: ({focused}) => {
             if (focused)
               return (
@@ -87,9 +89,10 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="    "
+        name="Chat"
         component={Chat}
         options={{
+          tabBarLabel: '',
           tabBarIcon: ({focused}) => {
             if (focused)
               return (
@@ -109,9 +112,10 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="     "
+        name="Profile"
         component={Profile}
         options={{
+          tabBarLabel: '',
           tabBarIcon: ({focused}) => {
             if (focused)
               return (

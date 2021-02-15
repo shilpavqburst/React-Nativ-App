@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {LoginButton, AccessToken} from 'react-native-fbsdk';
 import {
   SafeAreaView,
@@ -15,8 +15,13 @@ import {
   TouchableOpacity,
   TouchableNativeFeedback,
 } from 'react-native';
+import {Appcontext} from '../../App';
 
-const App = () => {
+const Sign_in = () => {
+  const {loggedIn, onLogin} = useContext(Appcontext);
+  const [user, setUser] = useState('');
+  const [pass, setPass] = useState('');
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="dark-content" />
@@ -24,19 +29,32 @@ const App = () => {
         <View>
           <Image
             style={styles.logo}
-            source={require('./src/assets/images/logo2.png')}
+            source={require('../assets/images/logo2.png')}
           />
         </View>
-        <TextInput placeholder="username" style={styles.TextInputStyleClass} />
-        <TextInput placeholder="password" style={styles.TextInputStyleClass} />
-        <TouchableOpacity
+        <View>
+          <TextInput
+            placeholder="username"
+            style={styles.TextInputStyleClass}
+            onChangeText={(text) => {
+              setUser(text);
+            }}
+          />
+          <TextInput
+            placeholder="password"
+            style={styles.TextInputStyleClass}
+            onChangeText={(text) => {
+              setPass(text);
+            }}
+          />
+        </View>
+        <TouchableNativeFeedback
           onPress={() => {
-            console.warn('sss');
+            if (user === 'shilpa' && pass == 'shilpa') onLogin(true);
+            else alert('invalid username or password');
           }}>
-          <View>
-            <Text style={styles.button}>LOGIN</Text>
-          </View>
-        </TouchableOpacity>
+          <Text style={styles.button}>LOGIN</Text>
+        </TouchableNativeFeedback>
         <Text style={styles.fp}>forgot password?</Text>
         <Text style={styles.text}>
           don't have an account?{'\t'}
@@ -86,19 +104,19 @@ const App = () => {
             }}>
             <Image
               style={[styles.facebook, {overflow: 'hidden'}]}
-              source={require('./src/assets/images/facebook.png')}
+              source={require('../assets/images/facebook.png')}
             />
           </TouchableOpacity>
           <View style={{flexDirection: 'column'}}>
             <Image
               style={styles.twitter}
-              source={require('./src/assets/images/twitter.png')}
+              source={require('../assets/images/twitter.png')}
             />
           </View>
           <View style={{flexDirection: 'column'}}>
             <Image
               style={styles.google}
-              source={require('./src/assets/images/google.png')}
+              source={require('../assets/images/google.png')}
             />
           </View>
         </View>
@@ -147,7 +165,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     justifyContent: 'center',
-    height: 50,
+    paddingVertical: 10,
     width: 330,
 
     top: 160,
@@ -181,4 +199,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Sign_in;

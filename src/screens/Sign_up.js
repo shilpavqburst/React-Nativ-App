@@ -24,7 +24,7 @@ const App = () => {
         <View>
           <Image
             style={styles.logo}
-            source={require('./src/assets/images/uploadimg.png')}
+            source={require('../assets/images/uploadimg.png')}
           />
         </View>
         <Text

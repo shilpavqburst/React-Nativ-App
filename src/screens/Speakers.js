@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   SafeAreaView,
   StyleSheet,
@@ -7,6 +8,7 @@ import {
   Text,
   StatusBar,
   Image,
+  TouchableNativeFeedback,
 } from 'react-native';
 
 const arr = [
@@ -61,69 +63,97 @@ const arr = [
   },
 ];
 
-const App = () => {
+const App = ({navigation}) => {
+  let data = [
+    {
+      value: 'Banana',
+    },
+    {
+      value: 'Mango',
+    },
+    {
+      value: 'Pear',
+    },
+  ];
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="dark-content" />
+      <View style={styles.head}>
+        <Text
+          style={{
+            fontFamily: 'bariol_regular-webfont',
+            fontSize: 30,
+            color: 'rgba(255,121,86,1)',
+            //margin: 20,
+          }}>
+          speakers
+        </Text>
+      </View>
 
       <ScrollView
         style={{backgroundColor: '#e8e8e8'}}
         contentContainerStyle={{
           flexDirection: 'column',
           flexWrap: 'wrap',
-          paddingTop: 100,
+          top: 50,
         }}>
-        {arr.map((itm) => (
-          <View style={styles.box}>
-            <View
-              style={{
-                width: 50,
-                height: 50,
-                //borderRightWidth: 0.5,
-                //borderColor: '#C1C1C1',
-                justifyContent: 'center',
-              }}>
-              <Image source={itm.img} style={{height: 80, width: 80}} />
-            </View>
+        {arr.map((itm, indx) => (
+          <TouchableNativeFeedback
+            key={indx}
+            onPress={() => {
+              navigation.navigate('Audio engine');
+            }}>
+            <View style={styles.box}>
+              <View
+                style={{
+                  width: 50,
+                  height: 50,
+                  //borderRightWidth: 0.5,
+                  //borderColor: '#C1C1C1',
+                  justifyContent: 'center',
+                }}>
+                <Image source={itm.img} style={{height: 80, width: 80}} />
+              </View>
 
-            <View style={{width: 255, paddingLeft: 40}}>
-              <Text
-                style={{
-                  color: '#98817b',
-                  fontFamily: 'bariol_regular-webfont',
-                  fontSize: 20,
-                }}>
-                {itm.title}
-              </Text>
-              <Text
-                style={{
-                  color: '#98817b',
-                  fontFamily: 'bariol_regular-webfont',
-                  fontSize: 14,
-                }}>
-                {itm.basetext}
-              </Text>
-              <Text
-                style={{
-                  color: '#FF7F50',
-                  fontFamily: 'bariol_regular-webfont',
-                  fontSize: 20,
-                }}>
-                {itm.price}
-              </Text>
+              <View style={{width: 255, paddingLeft: 40}}>
+                <Text
+                  style={{
+                    color: '#98817b',
+                    fontFamily: 'bariol_regular-webfont',
+                    fontSize: 20,
+                  }}>
+                  {itm.title}
+                </Text>
+                <Text
+                  style={{
+                    color: '#98817b',
+                    fontFamily: 'bariol_regular-webfont',
+                    fontSize: 14,
+                  }}>
+                  {itm.basetext}
+                </Text>
+                <Text
+                  style={{
+                    color: '#FF7F50',
+                    fontFamily: 'bariol_regular-webfont',
+                    fontSize: 20,
+                  }}>
+                  {itm.price}
+                </Text>
+              </View>
+              <View style={{flexDirection: 'row', top: 35}}>
+                <Image style={{top: 3}} source={itm.img2} />
+                <Text
+                  style={{
+                    color: '#98817b',
+                    fontFamily: 'bariol_regular-webfont',
+                    fontSize: 14,
+                  }}>
+                  {itm.time}
+                </Text>
+              </View>
             </View>
-            <View style={{flexDirection: 'row', top: 35}}>
-              <Image style={{top: 3}} source={itm.img2} />
-              <Text
-                style={{
-                  color: '#98817b',
-                  fontFamily: 'bariol_regular-webfont',
-                  fontSize: 14,
-                }}>
-                {itm.time}
-              </Text>
-            </View>
-          </View>
+          </TouchableNativeFeedback>
         ))}
       </ScrollView>
     </SafeAreaView>
@@ -136,6 +166,13 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
+  },
+  head: {
+    backgroundColor: '#FFFFFF',
+    height: 70,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   box: {
     width: '100%',
