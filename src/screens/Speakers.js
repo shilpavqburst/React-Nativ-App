@@ -64,17 +64,6 @@ const arr = [
 ];
 
 const App = ({navigation}) => {
-  let data = [
-    {
-      value: 'Banana',
-    },
-    {
-      value: 'Mango',
-    },
-    {
-      value: 'Pear',
-    },
-  ];
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="dark-content" />
@@ -94,8 +83,8 @@ const App = ({navigation}) => {
         style={{backgroundColor: '#e8e8e8'}}
         contentContainerStyle={{
           flexDirection: 'column',
-          flexWrap: 'wrap',
-          top: 50,
+          //flexWrap: 'wrap',
+          // top: 50,
         }}>
         {arr.map((itm, indx) => (
           <TouchableNativeFeedback
@@ -115,12 +104,13 @@ const App = ({navigation}) => {
                 <Image source={itm.img} style={{height: 80, width: 80}} />
               </View>
 
-              <View style={{width: 255, paddingLeft: 40}}>
+              <View style={{width: 220, paddingLeft: 40}}>
                 <Text
                   style={{
                     color: '#98817b',
                     fontFamily: 'bariol_regular-webfont',
                     fontSize: 20,
+                    width: 300,
                   }}>
                   {itm.title}
                 </Text>
