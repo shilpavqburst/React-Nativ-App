@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Switch, TouchableOpacity} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 import {
   SafeAreaView,
@@ -14,13 +15,76 @@ import {
   ImageBackground,
   TouchableNativeFeedback,
 } from 'react-native';
+import {FlatList} from 'react-native';
+import DropComponent from '../components/DropComponent';
+
+const itm = {
+  name: '',
+  loc: '',
+  price: '',
+  time: '',
+  sellerType: '',
+  category: '',
+  subCategory: '',
+  phone: '',
+  img: [],
+  negotiable: false,
+  featured: false,
+  desc: '',
+};
+
+const catSelect = [
+  'mobile',
+  'real estate',
+  'electronics',
+  'leisure',
+  'appliances',
+  'automotive',
+  'pets',
+  'sports',
+  'furniture',
+  'entertainment',
+  'instruments',
+  'book/magazine',
+  'fashion',
+  'machinery',
+  'others',
+];
+
+const subCatSelect = {
+  mobile: ['samsung'],
+  realestate: ['ernakulam'],
+  electronics: [
+    'audio players',
+    'computer/laptops',
+    'printers/scanners',
+    'vcd/dvd players',
+    'tablet/e-readers',
+    'camera/camcoder',
+    'speakers',
+    'calculator',
+    'headphones',
+  ],
+  leisure: ['fishing'],
+  appliances: ['tv'],
+  automotive: ['car'],
+  pets: ['dog'],
+  sports: ['cricket'],
+  furniture: ['sofa'],
+  entertainment: ['movie'],
+  instruments: ['string'],
+  bookmagazine: ['fiction'],
+  fashion: ['watch'],
+  machinery: ['driller'],
+  others: ['household'],
+};
+
+const sellerTypeSelect = ['agent', 'self'];
 
 const Create_Ad = ({navigation}) => {
-  const [isEnabled1, setIsEnabled1] = useState(false);
-  const toggleSwitch1 = () => setIsEnabled1((previousState) => !previousState);
+  const [item, setItem] = useState(itm);
+
   const [imageSRC, setImageSRC] = useState([]);
-  const [isEnabled2, setIsEnabled2] = useState(false);
-  const toggleSwitch2 = () => setIsEnabled2((previousState) => !previousState);
 
   const takePhotoFromGallery = () => {
     ImagePicker.openPicker({
@@ -35,6 +99,12 @@ const Create_Ad = ({navigation}) => {
     });
   };
 
+  const onItemValueChange = (txt, value) => {
+    console.warn(txt);
+    const temp = item;
+    temp[value] = txt;
+    setItem({...temp});
+  };
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.head}>
@@ -116,14 +186,38 @@ const Create_Ad = ({navigation}) => {
 
         <TextInput
           placeholder="product title"
+          value={item.name}
+          onChangeText={(text) => onItemValueChange(text, 'name')}
           style={styles.TextInputStyleClass}
         />
-        <TextInput
-          placeholder="select category"
-          style={styles.TextInputStyleClass}
+        <DropComponent
+          list={catSelect}
+          selectedValue={
+            item?.category == '' ? 'select category' : item?.category
+          }
+          onSelectValue={(txt) => onItemValueChange(txt, 'category')}
         />
+
+        <DropComponent
+          list={subCatSelect[item?.category]}
+          selectedValue={
+            item?.subCategory == '' ? 'select sub-category' : item?.subCategory
+          }
+          onSelectValue={(txt) => onItemValueChange(txt, 'subCategory')}
+        />
+
+        <DropComponent
+          list={sellerTypeSelect}
+          selectedValue={
+            item?.sellerType == '' ? 'select seller type' : item?.sellerType
+          }
+          onSelectValue={(txt) => onItemValueChange(txt, 'sellerType')}
+        />
+
         <TextInput
           placeholder="description"
+          value={item.desc}
+          onChangeText={(text) => onItemValueChange(text, 'desc')}
           style={styles.TextInputStyleClass}
         />
         <TextInput placeholder="price" style={styles.TextInputStyleClass} />
@@ -132,10 +226,12 @@ const Create_Ad = ({navigation}) => {
 
           <Switch
             trackColor={{false: '#e8e8e8', true: '#31ea92'}}
-            thumbColor={isEnabled1 ? '#FFFFFF' : '#FFFFFF'}
+            thumbColor={item?.negotiable ? '#FFFFFF' : '#FFFFFF'}
             ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitch1}
-            value={isEnabled1}
+            onValueChange={() =>
+              onItemValueChange(!item?.negotiable, 'negotiable')
+            }
+            value={item?.negotiable}
             style={{marginRight: 30}}
           />
         </View>
@@ -143,10 +239,10 @@ const Create_Ad = ({navigation}) => {
           <Text style={styles.TextStyleClass}>feature the product</Text>
           <Switch
             trackColor={{false: '#e8e8e8', true: '#31ea92'}}
-            thumbColor={isEnabled2 ? '#FFFFFF' : '#FFFFFF'}
+            thumbColor={item?.featured ? '#FFFFFF' : '#FFFFFF'}
             ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitch2}
-            value={isEnabled2}
+            onValueChange={() => onItemValueChange(!item?.featured, 'featured')}
+            value={item?.featured}
             style={{marginRight: 30}}
           />
         </View>
@@ -226,8 +322,8 @@ const styles = StyleSheet.create({
     top: 20,
     marginRight: 30,
     paddingLeft: 20,
-    paddingTop: 11,
-    paddingBottom: 11,
+    paddingTop: 7,
+    paddingBottom: 5,
     //justifyContent: 'space-between',
   },
   button: {
@@ -261,7 +357,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     fontFamily: 'bariol_light-webfont',
     top: 20,
-    color: '#98817b',
+    color: 'rgba(162,134,128,1)',
   },
   images: {
     // flexDirection: 'row',

@@ -12,6 +12,7 @@ import {
   Image,
   TouchableNativeFeedback,
   TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 
 const arr = [
@@ -66,35 +67,39 @@ const arr = [
   },
 ];
 
-const App = ({navigation}) => {
-<<<<<<< HEAD
+const App = ({
+  navigation,
+  route: {
+    params: {data, subCatName},
+  },
+}) => {
   const [country, setCountry] = useState('ernakulam');
 
   const [showSearchBar, setSearchBar] = useState(false);
+  const [grid, setGrid] = useState(false);
   const [searchText, setSearchText] = useState('');
   const [list, setList] = useState(arr);
   const onClick = () => {
     setSearchBar(!showSearchBar);
     if (showSearchBar) {
       setSearchText('');
-      setList(arr);
+      setList(data);
     }
   };
 
   const onSearch = (text) => {
     setSearchText(text);
     if (text === '') {
-      setList(arr);
+      setList(data);
     } else {
       const temp = list.filter((itm) => {
-        if (itm.title.indexOf(text) > -1) return itm;
+        if (itm?.name?.toLowerCase().indexOf(text?.toLowerCase()) > -1)
+          return itm;
       });
       setList(temp);
     }
   };
 
-=======
->>>>>>>  screens updated
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <View style={styles.head}>
@@ -120,7 +125,7 @@ const App = ({navigation}) => {
             marginTop: 33,
             marginBottom: 12.97,
           }}>
-          speakers
+          {subCatName}
         </Text>
         <View>
           <TouchableOpacity onPress={onClick}>
@@ -168,7 +173,7 @@ const App = ({navigation}) => {
               {
                 label: 'ernakulam',
                 value: 'ernakulam',
-                hidden: true,
+                //hidden: true,
               },
               {
                 label: 'trivandrum',
@@ -220,7 +225,7 @@ const App = ({navigation}) => {
             />
             <TouchableNativeFeedback
               onPress={() => {
-                navigation.navigate('Speaker Gridview');
+                setGrid(!grid);
               }}>
               <Image
                 style={{
@@ -238,104 +243,88 @@ const App = ({navigation}) => {
             </TouchableNativeFeedback>
           </View>
         </View>
-        {list.map((itm, indx) => (
-          <TouchableNativeFeedback
-            key={indx}
-            onPress={() => {
-              navigation.navigate('Audio engine');
-            }}>
-            <View style={styles.box}>
-              <View
-                style={{
-                  marginLeft: 9,
-                  marginBottom: 9,
-                  marginTop: 9,
-                  zIndex: 1,
+        <ImageBackground
+          style={{height: '100%', width: '100%'}}
+          source={require('../assets/images/bg.png')}>
+          {list.length !== 0 &&
+            list.map((itm, indx) => (
+              <TouchableNativeFeedback
+                key={indx}
+                onPress={() => {
+                  navigation.navigate('Audio engine');
                 }}>
-                <Image source={itm.img} style={{height: 70, width: 70}} />
-              </View>
+                <View style={grid ? styles.gridbox : styles.box}>
+                  <View
+                    style={{
+                      marginLeft: 9,
+                      marginBottom: 9,
+                      marginTop: 9,
+                      zIndex: 1,
+                    }}>
+                    <Image source={itm.img} style={{height: 70, width: 70}} />
+                  </View>
 
-<<<<<<< HEAD
-              <View style={{marginLeft: 10}}>
-                <View style={{marginTop: 10}}>
-                  <Text
+                  <View style={grid ? styles.gridtext : styles.listtext}>
+                    <View style={{marginTop: 10}}>
+                      <Text
+                        style={{
+                          color: '#98817b',
+                          fontFamily: 'bariol_regular-webfont',
+                          fontSize: 20,
+                          // width: 300,
+                          //marginTop: 10,
+                        }}>
+                        {itm.title}
+                      </Text>
+                      <Text
+                        style={{
+                          color: '#98817b',
+                          fontFamily: 'bariol_regular-webfont',
+                          fontSize: 14,
+                        }}>
+                        {itm.basetext}
+                      </Text>
+                    </View>
+                    <Text
+                      style={{
+                        color: '#FF7F50',
+                        fontFamily: 'bariol_regular-webfont',
+                        fontSize: 20,
+                        marginTop: 10,
+                        marginBottom: 13,
+                      }}>
+                      {itm.price}
+                    </Text>
+                  </View>
+                  <View
                     style={{
-                      color: '#98817b',
-                      fontFamily: 'bariol_regular-webfont',
-                      fontSize: 20,
-                      // width: 300,
-                      //marginTop: 10,
+                      flexDirection: 'row',
+                      marginBottom: 11,
+                      //marginRight: 10,
+                      position: 'absolute',
+                      right: 10,
+                      bottom: 0,
                     }}>
-                    {itm.title}
-                  </Text>
-                  <Text
-                    style={{
-                      color: '#98817b',
-                      fontFamily: 'bariol_regular-webfont',
-                      fontSize: 14,
-                    }}>
-                    {itm.basetext}
-                  </Text>
+                    <Image
+                      style={{height: 10.57, width: 10.57}}
+                      source={itm.img2}
+                    />
+                    <Text
+                      style={{
+                        color: '#98817b',
+                        fontFamily: 'bariol_regular-webfont',
+                        fontSize: 14,
+                        marginRight: 10,
+                        // marginLeft: 2,
+                        bottom: 2,
+                      }}>
+                      {itm.time}
+                    </Text>
+                  </View>
                 </View>
-=======
-              <View style={{width: 220, paddingLeft: 40}}>
-                <Text
-                  style={{
-                    color: '#98817b',
-                    fontFamily: 'bariol_regular-webfont',
-                    fontSize: 20,
-                    width: 300,
-                  }}>
-                  {itm.title}
-                </Text>
-                <Text
-                  style={{
-                    color: '#98817b',
-                    fontFamily: 'bariol_regular-webfont',
-                    fontSize: 14,
-                  }}>
-                  {itm.basetext}
-                </Text>
->>>>>>>  screens updated
-                <Text
-                  style={{
-                    color: '#FF7F50',
-                    fontFamily: 'bariol_regular-webfont',
-                    fontSize: 20,
-                    marginTop: 10,
-                    marginBottom: 13,
-                  }}>
-                  {itm.price}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  marginBottom: 11,
-                  //marginRight: 10,
-                  position: 'absolute',
-                  right: 10,
-                  bottom: 0,
-                }}>
-                <Image
-                  style={{height: 10.57, width: 10.57}}
-                  source={itm.img2}
-                />
-                <Text
-                  style={{
-                    color: '#98817b',
-                    fontFamily: 'bariol_regular-webfont',
-                    fontSize: 14,
-                    marginRight: 10,
-                    // marginLeft: 2,
-                    bottom: 2,
-                  }}>
-                  {itm.time}
-                </Text>
-              </View>
-            </View>
-          </TouchableNativeFeedback>
-        ))}
+              </TouchableNativeFeedback>
+            ))}
+        </ImageBackground>
       </ScrollView>
     </SafeAreaView>
   );
@@ -369,7 +358,24 @@ const styles = StyleSheet.create({
     borderColor: '#FFFFFF',
     zIndex: 1,
   },
+
+  gridbox: {
+    width: 174,
+    height: 174,
+    alignItems: 'center',
+    //margin: 9,
+    //backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+  listtext: {marginLeft: 10},
+  gridtext: {
+    paddingLeft: 45,
+    backgroundColor: '#1d1d1d',
+    marginTop: 145,
+    height: 40,
+    justifyContent: 'space-between',
+  },
 });
 
 export default App;
-

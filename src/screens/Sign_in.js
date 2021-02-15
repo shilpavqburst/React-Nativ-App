@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
+import auth from '@react-native-firebase/auth';
 import {
   SafeAreaView,
   StyleSheet,
@@ -21,6 +22,20 @@ const Sign_in = ({navigation}) => {
   const {loggedIn, onLogin} = useContext(Appcontext);
   const [user, setUser] = useState('');
   const [pass, setPass] = useState('');
+
+  const signin = () => {
+    if (user !== '' && pass !== '') {
+      try {
+        auth()
+          .signInWithEmailAndPassword(user, pass)
+          .then(() => {});
+      } catch (e) {
+        console.warn(e);
+      }
+    } else {
+      alert('invalid email');
+    }
+  };
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
@@ -49,18 +64,13 @@ const Sign_in = ({navigation}) => {
 
         <TouchableNativeFeedback
           onPress={() => {
-            if (user === 'shilpa' && pass == 'shilpa') onLogin(true);
-            else alert('invalid username or password');
+            signin();
           }}>
           <Text style={styles.button}>LOGIN</Text>
         </TouchableNativeFeedback>
         <Text style={styles.fp}>forgot password?</Text>
         <Text style={styles.text}>
           don't have an account?{'\t'}
-<<<<<<< HEAD
-=======
-          {'\t'}
->>>>>>>  screens updated
           <TouchableNativeFeedback
             onPress={() => {
               navigation.navigate('Sign up');
@@ -148,25 +158,10 @@ const Sign_in = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-<<<<<<< HEAD
   container: {
     backgroundColor: '#FFFFFF',
     //flex: 1,
     // marginTop: 50,
-=======
-  scrollView: {
-    backgroundColor: '#FFFFFF',
-  },
-
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    flexDirection: 'column',
-    //justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    backgroundColor: '#FFFFFF',
->>>>>>>  screens updated
   },
   logo: {
     width: 261,

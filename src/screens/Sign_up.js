@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
+import ImagePicker from 'react-native-image-crop-picker';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   SafeAreaView,
   StyleSheet,
@@ -12,24 +14,80 @@ import {
   TouchableOpacity,
   TouchableNativeFeedback,
   placeholderTextColor,
+  ImageBackground,
 } from 'react-native';
+import auth from '@react-native-firebase/auth';
 
 const App = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
+  const onSignup = () => {
+    if (email !== '' && pass !== '') {
+      try {
+        auth()
+          .createUserWithEmailAndPassword(email, pass)
+          .then(() => {
+            navigation.pop();
+          });
+      } catch (e) {
+        console.warn(e);
+      }
+    } else {
+      alert('invalid email');
+    }
+  };
+
+  const [imageSRC, setImageSRC] = useState(null);
+
+  const takePhotoFromGallery = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then((image) => {
+      setImageSRC(image.path);
+      console.warn(image.path);
+    });
+  };
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <ScrollView contentContainerStyle={styles.container}>
         <TouchableNativeFeedback
           onPress={() => {
-            navigation.navigate('Sign in');
+            navigation.goBack();
           }}>
           <Image
             style={{height: 18, width: 10, marginTop: 13, marginLeft: 13}}
             source={require('../assets/images/titlebar_back_arrow.png')}></Image>
         </TouchableNativeFeedback>
-        <Image
-          style={styles.logo}
-          source={require('../assets/images/uploadimg.png')}
-        />
+        <View>
+          {!imageSRC ? (
+            <TouchableOpacity onPress={takePhotoFromGallery}>
+              <Image
+                style={styles.logo}
+                source={require('../assets/images/uploadimg.png')}
+              />
+            </TouchableOpacity>
+          ) : (
+            <View>
+              <ImageBackground style={[styles.images]} source={{uri: imageSRC}}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setImageSRC(null);
+                  }}>
+                  <Icon
+                    name="times-circle"
+                    size={15}
+                    style={{
+                      color: '#fff',
+                      alignSelf: 'flex-end',
+                    }}
+                  />
+                </TouchableOpacity>
+              </ImageBackground>
+            </View>
+          )}
+        </View>
 
         <Text
           style={{
@@ -56,6 +114,10 @@ const App = ({navigation}) => {
           placeholder="email id"
           placeholderTextColor="rgba(162,134,128,1)"
           style={styles.TextInputStyleClass}
+          value={email}
+          onChangeText={(text) => {
+            setEmail(text);
+          }}
         />
         <TextInput
           placeholder="mobile number"
@@ -66,24 +128,27 @@ const App = ({navigation}) => {
           placeholder="address"
           placeholderTextColor="rgba(162,134,128,1)"
           style={styles.TextInputStyleClass}
+          // onChange={()=>}
         />
         <TextInput
           placeholder="password"
+          value={pass}
           placeholderTextColor="rgba(162,134,128,1)"
           style={styles.TextInputStyleClass}
+          onChangeText={(text) => {
+            setPass(text);
+          }}
         />
         <TextInput
           placeholder="confirm password"
           placeholderTextColor="rgba(162,134,128,1)"
           style={styles.TextInputStyleClass}
         />
-        <Text style={styles.button}>REGISTER</Text>
+        <TouchableOpacity onPress={onSignup}>
+          <Text style={styles.button}>REGISTER</Text>
+        </TouchableOpacity>
         <Text style={styles.text}>
           already have an account?{'\t'}
-<<<<<<< HEAD
-=======
-          {'\t'}
->>>>>>>  screens updated
           <TouchableNativeFeedback
             onPress={() => {
               navigation.navigate('Sign in');
@@ -157,6 +222,16 @@ const styles = StyleSheet.create({
     marginRight: 79,
     width: 217,
     alignSelf: 'center',
+  },
+  images: {
+    width: 75,
+    height: 75,
+    marginTop: 12,
+    alignSelf: 'center',
+    marginLeft: 150,
+    marginRight: 150,
+    borderRadius: 50,
+    overflow: 'hidden',
   },
 });
 

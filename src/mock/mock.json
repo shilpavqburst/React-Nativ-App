@@ -1,0 +1,27 @@
+{
+    "data":[
+        {
+            "category":"Mobile",
+            "img":"",
+            "subCat":[
+                {
+                    "subCatName":"headphones",
+                    "img":"",
+                    "items":[
+                        {
+                            "name":"kenwood mini speakers",
+                            "loc":"kochi, kerala",
+                            "price":"12000",
+                            "time":"07:50pm",
+                            "sellerType":"agent",
+                            "category":"electronics",
+                            "phone":"986848258",
+                            "img":[]
+                        }
+                    ]
+                }
+            ] 
+        }   
+    ]
+}
+

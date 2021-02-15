@@ -96,7 +96,8 @@ const Favourite = () => {
       setList(arr);
     } else {
       const temp = list.filter((itm) => {
-        if (itm.title.indexOf(text) > -1) return itm;
+        if (itm.title.toLowerCase().indexOf(text.toLowerCase()) > -1)
+          return itm;
       });
       setList(temp);
     }

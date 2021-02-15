@@ -10,7 +10,10 @@ import {
   StatusBar,
   Image,
   ImageBackground,
+  TouchableNativeFeedback,
 } from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import auth from '@react-native-firebase/auth';
 
 const arr = [
   {
@@ -64,19 +67,26 @@ const arr = [
 ];
 
 const Profile = () => {
+  const onlogout = () => {
+    auth()
+      .signOut()
+      .then(() => console.log('User signed out!'));
+  };
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.head}>
-        <Image
-          style={{
-            height: 18,
-            width: 17,
-            marginTop: 33,
-            marginBottom: 13,
-            marginLeft: 10,
-            alignSelf: 'flex-start',
-          }}
-          source={require('../assets/images/logout_icn.png')}></Image>
+        <TouchableNativeFeedback onPress={onlogout}>
+          <Image
+            style={{
+              height: 18,
+              width: 17,
+              marginTop: 33,
+              marginBottom: 13,
+              marginLeft: 10,
+              alignSelf: 'flex-start',
+            }}
+            source={require('../assets/images/logout_icn.png')}></Image>
+        </TouchableNativeFeedback>
         <Text
           style={{
             fontFamily: 'bariol_regular-webfont',

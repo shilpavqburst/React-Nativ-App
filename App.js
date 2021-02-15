@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import RootSwitch from './src/navigation/RootSwitch';
+import {StatusBar} from 'react-native';
 
 export const Appcontext = React.createContext({
   loggedIn: false,
@@ -12,6 +13,7 @@ export default function App() {
   return (
     <Appcontext.Provider
       value={{loggedIn: loggedIn, onLogin: () => setLoggedIn(true)}}>
+      <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       <NavigationContainer>
         <RootSwitch />
       </NavigationContainer>

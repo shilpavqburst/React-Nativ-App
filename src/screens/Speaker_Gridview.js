@@ -89,7 +89,8 @@ const App = ({navigation}) => {
       setList(arr);
     } else {
       const temp = list.filter((itm) => {
-        if (itm.title.indexOf(text) > -1) return itm;
+        if (itm.title.toLowerCase().indexOf(text.toLowerCase()) > -1)
+          return itm;
       });
       setList(temp);
     }
@@ -253,7 +254,7 @@ const App = ({navigation}) => {
                 onPress={() => {
                   navigation.navigate('Audio engine');
                 }}>
-                <View style={styles.box}>
+                <View style={styles.gridbox}>
                   <View>
                     <ImageBackground
                       source={itm.img}
@@ -264,17 +265,7 @@ const App = ({navigation}) => {
                           // width: '100%',
                         }
                       }>
-                      <View
-                        style={{
-                          //width: '100%',
-                          paddingLeft: 45,
-                          backgroundColor: '#1d1d1d',
-                          marginTop: 145,
-                          //bottom: 20,
-                          //marginLeft: 5,
-                          height: 40,
-                          justifyContent: 'space-between',
-                        }}>
+                      <View style={styles.gridtext}>
                         <Text
                           style={{
                             color: '#FFFFFF',
@@ -336,15 +327,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderBottomWidth: 1,
     borderColor: 'rgba(232,232,232,1)',
-  },
-  box: {
-    width: 174,
-    height: 174,
-    alignItems: 'center',
-    //margin: 9,
-    //backgroundColor: '#FFFFFF',
-    justifyContent: 'center',
-    marginBottom: 20,
   },
   Image: {
     width: 50,

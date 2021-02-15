@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -17,72 +17,45 @@ import {
   FlatList,
 } from 'react-native';
 import {Header} from 'react-native/Libraries/NewAppScreen';
+import firestore from '@react-native-firebase/firestore';
 const {height, width} = Dimensions.get('screen');
-
 const arr = [
-  {
-    title: 'mobiles',
-    img: require('../assets/images/mobile_icn.png'),
-  },
-  {
-    title: 'real estate',
-    img: require('../assets/images/realestate_icn.png'),
-  },
-  {
-    title: 'electronics',
-    img: require('../assets/images/electronics_icn.png'),
-  },
-  {
-    title: 'leisure',
-    img: require('../assets/images/realestate_icn.png'),
-  },
-  {
-    title: 'appliances',
-    img: require('../assets/images/appliances_icn.png'),
-  },
-  {
-    title: 'automotive',
-    img: require('../assets/images/automotive_icn.png'),
-  },
-  {
-    title: 'pets',
-    img: require('../assets/images/pets_icn.png'),
-  },
-  {
-    title: 'sports',
-    img: require('../assets/images/sport_icn.png'),
-  },
-  {
-    title: 'furniture',
-    img: require('../assets/images/furniture_icn.png'),
-  },
-  {
-    title: 'entertainment',
-    img: require('../assets/images/entertainment_icn.png'),
-  },
-  {
-    title: 'instruments',
-    img: require('../assets/images/instrument_icn.png'),
-  },
-  {
-    title: 'book/magazine',
-    img: require('../assets/images/books_magazine_icn.png'),
-  },
-  {
-    title: 'fashion',
-    img: require('../assets/images/fashion_icn.png'),
-  },
-  {
-    title: 'machenery',
-    img: require('../assets/images/machenery_icn.png'),
-  },
-  {
-    title: 'others',
-    img: require('../assets/images/others_icn.png'),
-  },
+  require('../assets/images/mobile_icn.png'),
+  require('../assets/images/realestate_icn.png'),
+  require('../assets/images/electronics_icn.png'),
+  require('../assets/images/realestate_icn.png'),
+  require('../assets/images/appliances_icn.png'),
+  require('../assets/images/automotive_icn.png'),
+  require('../assets/images/pets_icn.png'),
+  require('../assets/images/sport_icn.png'),
+  require('../assets/images/furniture_icn.png'),
+  require('../assets/images/entertainment_icn.png'),
+  require('../assets/images/instrument_icn.png'),
+  require('../assets/images/books_magazine_icn.png'),
+  require('../assets/images/fashion_icn.png'),
+  require('../assets/images/machenery_icn.png'),
+  require('../assets/images/others_icn.png'),
 ];
 
 const Dashboard = ({navigation}) => {
+  const [list, setList] = useState([]);
+  useEffect(() => {
+    const subscription = firestore()
+      .collection('demo')
+      .onSnapshot((usersCollection) => {
+        const {data} = usersCollection.docs[0].data();
+        console.warn(data);
+        setList(data);
+      });
+    return () => subscription();
+  }, []);
+
+  const onOpenSubCat = (index) => {
+    const data = list[index].subCat;
+    const catName = list[index].category;
+    navigation.navigate('Electronics', {data, catName});
+  };
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <Image
@@ -101,7 +74,7 @@ const Dashboard = ({navigation}) => {
         </Text>
       </View>
       <FlatList
-        data={arr}
+        data={list}
         contentContainerStyle={{
           marginTop: '2%',
           marginLeft: '2.5%',
@@ -112,13 +85,10 @@ const Dashboard = ({navigation}) => {
           indx.toString();
         }}
         renderItem={({item, index}) => (
-          <TouchableNativeFeedback
-            onPress={() => {
-              navigation.navigate('Electronics');
-            }}>
+          <TouchableNativeFeedback onPress={() => onOpenSubCat(index)}>
             <View style={styles.box}>
               <View style={styles.img}>
-                <Image source={item.img} />
+                <Image source={arr[index]} />
               </View>
               <Text
                 style={{
@@ -129,7 +99,7 @@ const Dashboard = ({navigation}) => {
                   marginTop: 8,
                   alignSelf: 'center',
                 }}>
-                {item.title}
+                {item.category}
               </Text>
             </View>
           </TouchableNativeFeedback>

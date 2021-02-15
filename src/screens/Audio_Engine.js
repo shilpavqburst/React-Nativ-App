@@ -74,7 +74,6 @@ const App = ({navigation}) => {
             }}>
             <Image
               style={{
-<<<<<<< HEAD
                 height: 18,
                 width: 16,
                 //marginRight: 14,
@@ -126,23 +125,6 @@ const App = ({navigation}) => {
                   source={itm.img}
                   style={{height: 200, width: '100%'}}>
                   <View
-=======
-                width: '100%',
-                height: '100%',
-                justifyContent: 'center',
-                backgroundColor: '#FFFFFF',
-              }}>
-              <ImageBackground
-                source={itm.img}
-                style={{height: 300, width: '100%', top: 100}}>
-                <View
-                  style={{
-                    width: 310,
-                    top: 160,
-                    paddingLeft: 280,
-                  }}>
-                  <Text
->>>>>>>  screens updated
                     style={{
                       position: 'absolute',
                       right: 10,
@@ -181,10 +163,28 @@ const App = ({navigation}) => {
           <Text style={styles.big}>audio engine a2+ speakers</Text>
           <Text style={styles.small}>{'\n'}category</Text>
           <Text style={styles.big}>electronics</Text>
+          <Text style={styles.small}>{'\n'}sub category</Text>
+          <Text style={styles.big}>speakers</Text>
           <Text style={styles.small}>{'\n'}seller type</Text>
           <Text style={styles.big}>agent</Text>
+          <Text style={styles.small}>{'\n'}description</Text>
+          <Text style={styles.big}>
+            audioengine speakers with superb sound imaging and quality
+          </Text>
           <Text style={styles.small}>{'\n'}price</Text>
           <Text style={styles.big}>45000</Text>
+          <Text style={styles.small}>{'\n'}negotiable</Text>
+          <Text style={styles.big}>yes</Text>
+          <Text style={styles.small}>{'\n'}featured product</Text>
+          <Text style={styles.big}>no</Text>
+          <Text style={styles.small}>{'\n'}location</Text>
+          <Text style={styles.big}>kochi, kerala</Text>
+          <Text style={styles.small}>{'\n'}contact person</Text>
+          <Text style={styles.big}>mahesh sivasankaran</Text>
+          <Text style={styles.small}>{'\n'}email id</Text>
+          <Text style={styles.big}>maheshs@qburst.com</Text>
+          <Text style={styles.small}>{'\n'}contact number</Text>
+          <Text style={styles.big}>+91 989506624</Text>
         </View>
       </ScrollView>
       <ImageBackground
@@ -215,7 +215,7 @@ const App = ({navigation}) => {
             }}>
             <TouchableNativeFeedback
               onPress={() => {
-                Linking.openURL('tel:+XXXXXXXXXX');
+                Linking.openURL('tel:+9526349772');
               }}>
               <Image
                 style={{height: 70, width: 70, marginLeft: 20}}

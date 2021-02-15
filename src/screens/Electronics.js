@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SearchBar from 'react-native-dynamic-search-bar';
 import {
   SafeAreaView,
@@ -15,89 +15,54 @@ import {
   TouchableOpacity,
   TouchableNativeFeedback,
 } from 'react-native';
-import {Header} from 'react-native/Libraries/NewAppScreen';
 
 const arr = [
-  {
-    title: 'audio players',
-    img: require('../assets/images/audio_icn.png'),
-    basetext: '75 items',
-    img2: require('../assets/images/listarrow_icn.png'),
-  },
-
-  {
-    title: 'computer/laptops',
-    img: require('../assets/images/computer_laptop_icn.png'),
-    basetext: '75 items',
-    img2: require('../assets/images/listarrow_icn.png'),
-  },
-  {
-    title: 'printers/scanners',
-    img: require('../assets/images/printer_icn.png'),
-    basetext: '75 items',
-    img2: require('../assets/images/listarrow_icn.png'),
-  },
-  {
-    title: 'vcd/dvd players',
-    img: require('../assets/images/vcd_icn.png'),
-    basetext: '75 items',
-    img2: require('../assets/images/listarrow_icn.png'),
-  },
-  {
-    title: 'tablet/e-readers',
-    img: require('../assets/images/tablet_icn.png'),
-    basetext: '75 items',
-    img2: require('../assets/images/listarrow_icn.png'),
-  },
-  {
-    title: 'camera/camcoder',
-    img: require('../assets/images/camera_icn.png'),
-    basetext: '75 items',
-    img2: require('../assets/images/listarrow_icn.png'),
-  },
-  {
-    title: 'speakers',
-    img: require('../assets/images/speaker_icn.png'),
-    basetext: '75 items',
-    img2: require('../assets/images/listarrow_icn.png'),
-  },
-  {
-    title: 'calculator',
-    img: require('../assets/images/calc_icn.png'),
-    basetext: '75 items',
-    img2: require('../assets/images/listarrow_icn.png'),
-  },
-  {
-    title: 'headphones',
-    img: require('../assets/images/headphones_icn.png'),
-    basetext: '75 items',
-    img2: require('../assets/images/listarrow_icn.png'),
-  },
+  require('../assets/images/audio_icn.png'),
+  require('../assets/images/computer_laptop_icn.png'),
+  require('../assets/images/printer_icn.png'),
+  require('../assets/images/vcd_icn.png'),
+  require('../assets/images/tablet_icn.png'),
+  require('../assets/images/camera_icn.png'),
+  require('../assets/images/speaker_icn.png'),
+  require('../assets/images/calc_icn.png'),
+  require('../assets/images/headphones_icn.png'),
 ];
 
-const App = ({navigation}) => {
+const App = ({
+  navigation,
+  route: {
+    params: {data, catName},
+  },
+}) => {
   const [showSearchBar, setSearchBar] = useState(false);
   const [searchText, setSearchText] = useState('');
-  const [list, setList] = useState(arr);
+  const [list, setList] = useState(data);
   const onClick = () => {
     setSearchBar(!showSearchBar);
     if (showSearchBar) {
       setSearchText('');
-      setList(arr);
+      setList(data);
     }
   };
 
   const onSearch = (text) => {
     setSearchText(text);
     if (text === '') {
-      setList(arr);
+      setList(data);
     } else {
       const temp = list.filter((itm) => {
-        if (itm.title.indexOf(text) > -1) return itm;
+        if (itm.subCatName.toLowerCase().indexOf(text.toLowerCase()) > -1)
+          return itm;
       });
       setList(temp);
     }
   };
+  const onOpenitems = (index) => {
+    const data = list[index].items;
+    const subCatName = list[index].subCatName;
+    navigation.navigate('Speakers', {data, subCatName});
+  };
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.head}>
@@ -123,7 +88,7 @@ const App = ({navigation}) => {
             marginBottom: 12,
             marginTop: 33,
           }}>
-          electronics
+          {catName}
         </Text>
         <View>
           <TouchableOpacity onPress={onClick}>
@@ -155,11 +120,7 @@ const App = ({navigation}) => {
           flexWrap: 'wrap',
         }}>
         {list.map((itm, indx) => (
-          <TouchableNativeFeedback
-            key={indx}
-            onPress={() => {
-              navigation.navigate('Speakers');
-            }}>
+          <TouchableNativeFeedback onPress={() => onOpenitems(indx)}>
             <View style={styles.box}>
               <View style={{flexDirection: 'row'}}>
                 <View
@@ -170,7 +131,7 @@ const App = ({navigation}) => {
                     borderColor: 'rgba(242,242,242,1)',
                     justifyContent: 'center',
                   }}>
-                  <Image source={itm.img} style={{}} />
+                  <Image source={arr[indx]} style={{}} />
                 </View>
                 <View style={{width: 200, padding: 15}}>
                   <Text
@@ -179,7 +140,7 @@ const App = ({navigation}) => {
                       fontFamily: 'bariol_regular-webfont',
                       fontSize: 20,
                     }}>
-                    {itm.title}
+                    {itm.subCatName}
                   </Text>
                   <Text
                     style={{
@@ -187,12 +148,12 @@ const App = ({navigation}) => {
                       fontFamily: 'bariol_regular-webfont',
                       fontSize: 14,
                     }}>
-                    {itm.basetext}
+                    {itm.items.length} items
                   </Text>
                 </View>
               </View>
               <View style={{}}>
-                <Image source={itm.img2} />
+                <Image source={require('../assets/images/listarrow_icn.png')} />
               </View>
             </View>
           </TouchableNativeFeedback>
@@ -237,4 +198,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
