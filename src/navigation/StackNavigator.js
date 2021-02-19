@@ -1,7 +1,6 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 
-import Splash_Screen from '../screens/Splash_Screen';
 import Sign_in from '../screens/Sign_in';
 import Sign_up from '../screens/Sign_up';
 import Dashboard from '../screens/Dashboard';
