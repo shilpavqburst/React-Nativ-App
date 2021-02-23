@@ -15,6 +15,8 @@ target 'DemoProject' do
 
   pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'DemoProjectTests' do
     inherit! :complete
     # Pods for testing
