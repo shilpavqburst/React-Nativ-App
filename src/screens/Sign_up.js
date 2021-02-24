@@ -1,116 +1,158 @@
 import React from 'react';
-import {LoginButton, AccessToken} from 'react-native-fbsdk';
 import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
   Text,
-  Link,
   TextInput,
   StatusBar,
   Image,
-  ImageBackground,
   Button,
   TouchableOpacity,
   TouchableNativeFeedback,
+  placeholderTextColor,
 } from 'react-native';
 
-const App = () => {
+const App = ({navigation}) => {
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <StatusBar barStyle="dark-content" />
-      <View style={styles.container}>
-        <View>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <TouchableNativeFeedback
+          onPress={() => {
+            navigation.navigate('Sign in');
+          }}>
           <Image
-            style={styles.logo}
-            source={require('../assets/images/uploadimg.png')}
-          />
-        </View>
+            style={{height: 18, width: 10, marginTop: 13, marginLeft: 13}}
+            source={require('../assets/images/titlebar_back_arrow.png')}></Image>
+        </TouchableNativeFeedback>
+        <Image
+          style={styles.logo}
+          source={require('../assets/images/uploadimg.png')}
+        />
+
         <Text
           style={{
             color: '#98817b',
-            fontSize: 22,
-            top: 60,
+            fontSize: 18,
+            marginTop: 9,
             fontFamily: 'bariol_light-webfont',
+            //marginRight: 139.5,
+            //marginLeft: 139.5,
+            //width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignSelf: 'center',
           }}>
           upload image
         </Text>
 
-        <TextInput placeholder="username" style={styles.TextInputStyleClass} />
-        <TextInput placeholder="email id" style={styles.TextInputStyleClass} />
         <TextInput
-          placeholder="mobile number"
+          placeholder="username"
+          placeholderTextColor="rgba(162,134,128,1)"
           style={styles.TextInputStyleClass}
         />
-        <TextInput placeholder="address" style={styles.TextInputStyleClass} />
-        <TextInput placeholder="password" style={styles.TextInputStyleClass} />
+        <TextInput
+          placeholder="email id"
+          placeholderTextColor="rgba(162,134,128,1)"
+          style={styles.TextInputStyleClass}
+        />
+        <TextInput
+          placeholder="mobile number"
+          placeholderTextColor="rgba(162,134,128,1)"
+          style={styles.TextInputStyleClass}
+        />
+        <TextInput
+          placeholder="address"
+          placeholderTextColor="rgba(162,134,128,1)"
+          style={styles.TextInputStyleClass}
+        />
+        <TextInput
+          placeholder="password"
+          placeholderTextColor="rgba(162,134,128,1)"
+          style={styles.TextInputStyleClass}
+        />
         <TextInput
           placeholder="confirm password"
+          placeholderTextColor="rgba(162,134,128,1)"
           style={styles.TextInputStyleClass}
         />
         <Text style={styles.button}>REGISTER</Text>
         <Text style={styles.text}>
-          don't have an account?{'\t'}
-          {'\t'}
-          <Text style={{color: '#FF7F50'}}>register</Text>
+          already have an account?{'\t'}
+          <TouchableNativeFeedback
+            onPress={() => {
+              navigation.navigate('Sign in');
+            }}>
+            <Text style={{color: '#FF7F50'}}>login</Text>
+          </TouchableNativeFeedback>
         </Text>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: '#fff',
-  },
-
   container: {
-    flex: 1,
-    alignItems: 'center',
-    flexDirection: 'column',
-    //justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
+    //flex: 1,
+    //alignItems: 'center',
+    //flexDirection: 'column',
+    //justifyContent: 'space-around',
+    // width: '100%',
+    //height: '100%',
     backgroundColor: '#FFFFFF',
   },
   logo: {
     width: 75,
     height: 75,
-    top: 50,
-    alignItems: 'center',
+    marginTop: 12,
+    alignSelf: 'center',
+    marginLeft: 150,
+    marginRight: 150,
   },
   TextInputStyleClass: {
     textAlign: 'left',
-    marginBottom: 20,
+    marginBottom: -24,
     fontSize: 22,
-    height: 40,
-    width: 330,
+    height: 44,
+    //width: wp(80),
     borderWidth: 1,
-    top: 90,
+    marginTop: 42,
     borderColor: '#f3e6df',
+
     borderRadius: 20,
     backgroundColor: '#FFFFFF',
     fontFamily: 'bariol_light-webfont',
+    marginRight: 30,
+    marginLeft: 30,
+    justifyContent: 'center',
+    paddingLeft: 20,
+    paddingBottom: 11,
+    paddingTop: 11,
   },
   button: {
-    fontFamily: 'bariol_light-webfont',
-    fontSize: 24,
+    fontSize: 20,
     color: '#FFFFFF',
     textAlign: 'center',
     textAlignVertical: 'center',
     justifyContent: 'center',
-    height: 50,
-    width: 330,
-    top: 100,
+    paddingVertical: 10,
+    marginTop: 41,
     borderRadius: 22,
     backgroundColor: '#FF7F50',
+    height: 44,
+    marginLeft: 30,
+    marginRight: 30,
   },
   text: {
-    top: 120,
+    marginTop: 50,
     color: '#98817b',
-    fontSize: 22,
+    fontSize: 18,
     fontFamily: 'bariol_light-webfont',
+    marginLeft: 79,
+    marginRight: 79,
+    width: 217,
+    alignSelf: 'center',
   },
 });
 
