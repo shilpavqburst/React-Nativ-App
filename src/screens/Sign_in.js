@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {LoginButton, AccessToken} from 'react-native-fbsdk';
 import {
   SafeAreaView,
   StyleSheet,
@@ -14,40 +13,40 @@ import {
   Button,
   TouchableOpacity,
   TouchableNativeFeedback,
+  placeholderTextColor,
 } from 'react-native';
 import {Appcontext} from '../../App';
 
-const Sign_in = () => {
+const Sign_in = ({navigation}) => {
   const {loggedIn, onLogin} = useContext(Appcontext);
   const [user, setUser] = useState('');
   const [pass, setPass] = useState('');
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <StatusBar barStyle="dark-content" />
-      <View style={styles.container}>
-        <View>
-          <Image
-            style={styles.logo}
-            source={require('../assets/images/logo2.png')}
-          />
-        </View>
-        <View>
-          <TextInput
-            placeholder="username"
-            style={styles.TextInputStyleClass}
-            onChangeText={(text) => {
-              setUser(text);
-            }}
-          />
-          <TextInput
-            placeholder="password"
-            style={styles.TextInputStyleClass}
-            onChangeText={(text) => {
-              setPass(text);
-            }}
-          />
-        </View>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Image
+          style={styles.logo}
+          source={require('../assets/images/logo2.png')}
+        />
+
+        <TextInput
+          placeholder="username"
+          placeholderTextColor="rgba(162,134,128,1)"
+          style={styles.TextInputStyleClass}
+          onChangeText={(text) => {
+            setUser(text);
+          }}
+        />
+        <TextInput
+          placeholder="password"
+          placeholderTextColor="rgba(162,134,128,1)"
+          style={styles.TextInputStyleClass}
+          onChangeText={(text) => {
+            setPass(text);
+          }}
+        />
+
         <TouchableNativeFeedback
           onPress={() => {
             if (user === 'shilpa' && pass == 'shilpa') onLogin(true);
@@ -58,19 +57,34 @@ const Sign_in = () => {
         <Text style={styles.fp}>forgot password?</Text>
         <Text style={styles.text}>
           don't have an account?{'\t'}
-          {'\t'}
-          <Text style={{color: '#FF7F50'}}>register</Text>
+          <TouchableNativeFeedback
+            onPress={() => {
+              navigation.navigate('Sign up');
+            }}>
+            <Text style={{color: '#FF7F50'}}>register</Text>
+          </TouchableNativeFeedback>
         </Text>
         <View
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            width: 320,
-            top: 250,
+            //width: 320,
+            marginTop: 36,
+            marginRight: 30,
+            marginLeft: 30,
+            justifyContent: 'space-between',
           }}>
           <View style={{flex: 1, height: 1, backgroundColor: '#e5e4e2'}} />
           <View>
-            <Text style={{color: '#98817b'}}> or </Text>
+            <Text
+              style={{
+                color: 'rgba(162,134,128,1)',
+                fontSize: 16,
+                fontFamily: 'bariol_regular-webfont',
+              }}>
+              {' '}
+              or{' '}
+            </Text>
           </View>
           <View style={{flex: 1, height: 1, backgroundColor: '#e5e4e2'}} />
         </View>
@@ -78,10 +92,14 @@ const Sign_in = () => {
         <View
           style={{
             flexDirection: 'row',
-            width: '80%',
-            top: 300,
+            //width: '100%',
+            marginTop: 42,
             justifyContent: 'space-between',
             overflow: 'hidden',
+            //marginRight: 72,
+            //marginLeft: 73,
+            alignSelf: 'center',
+            marginBottom: 44,
           }}>
           <TouchableOpacity
             onPress={() => {
@@ -120,82 +138,92 @@ const Sign_in = () => {
             />
           </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: '#fff',
-  },
-
   container: {
-    flex: 1,
-    alignItems: 'center',
-    flexDirection: 'column',
-    //justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
+    backgroundColor: '#FFFFFF',
+    //flex: 1,
+    // marginTop: 50,
   },
   logo: {
-    width: 310,
-    height: 64,
-    top: 79,
-    //justifyContent: 'top',
-    //alignItems :'center',
+    width: 261,
+    height: 52,
+    marginTop: 79,
+    alignSelf: 'center',
+    marginLeft: 57,
+    marginRight: 57,
   },
   TextInputStyleClass: {
     textAlign: 'left',
-    marginBottom: 25,
+    marginBottom: -58,
     fontSize: 22,
-    height: 50,
-    width: 330,
+    height: 44,
+    //width: wp(80),
     borderWidth: 1,
-    top: 160,
+    marginTop: 160,
     borderColor: '#f3e6df',
     borderRadius: 20,
     backgroundColor: '#FFFFFF',
     fontFamily: 'bariol_light-webfont',
+    marginRight: 30,
+    marginLeft: 30,
+    justifyContent: 'center',
+    paddingLeft: 20,
+    paddingBottom: 11,
+    paddingTop: 11,
+    marginTop: 76,
   },
   button: {
     fontSize: 20,
-
     color: '#FFFFFF',
     textAlign: 'center',
     textAlignVertical: 'center',
     justifyContent: 'center',
     paddingVertical: 10,
-    width: 330,
-
-    top: 160,
-
+    marginTop: 75,
     borderRadius: 22,
     backgroundColor: '#FF7F50',
+    height: 44,
+    marginLeft: 30,
+    marginRight: 30,
   },
   fp: {
-    top: 180,
+    marginTop: 27,
     color: '#98817b',
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'bariol_light-webfont',
+    marginRight: 120,
+    marginLeft: 120,
+    alignSelf: 'center',
   },
   text: {
-    top: 210,
+    marginTop: 36,
     color: '#98817b',
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'bariol_light-webfont',
+    marginLeft: 65,
+    marginRight: 66,
+    alignSelf: 'center',
   },
   facebook: {
     height: 50,
     width: 50,
+    marginLeft: 73,
   },
   twitter: {
     height: 50,
     width: 50,
+    marginLeft: 40,
+    marginRight: 40,
   },
   google: {
     height: 50,
     width: 50,
+    marginRight: 72,
   },
 });
 
