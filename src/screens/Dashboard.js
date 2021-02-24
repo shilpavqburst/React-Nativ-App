@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {LoginButton, AccessToken} from 'react-native-fbsdk';
 import {
   SafeAreaView,
   StyleSheet,
@@ -14,8 +13,11 @@ import {
   Button,
   TouchableOpacity,
   TouchableNativeFeedback,
+  Dimensions,
+  FlatList,
 } from 'react-native';
 import {Header} from 'react-native/Libraries/NewAppScreen';
+const {height, width} = Dimensions.get('screen');
 
 const arr = [
   {
@@ -28,7 +30,7 @@ const arr = [
   },
   {
     title: 'electronics',
-    img: require('../assets/images/realestate_icn.png'),
+    img: require('../assets/images/electronics_icn.png'),
   },
   {
     title: 'leisure',
@@ -83,7 +85,6 @@ const arr = [
 const Dashboard = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
-      <StatusBar barStyle="dark-content" />
       <Image
         source={require('../assets/images/bg.png')}
         style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}
@@ -99,33 +100,41 @@ const Dashboard = ({navigation}) => {
           dashboard
         </Text>
       </View>
-      <ScrollView
-        style={{backgroundColor: '#00000000'}}
+      <FlatList
+        data={arr}
         contentContainerStyle={{
+          marginTop: '2%',
+          marginLeft: '2.5%',
           flexDirection: 'row',
           flexWrap: 'wrap',
-          paddingTop: 20,
-        }}>
-        {arr.map((itm, indx) => (
+        }}
+        keyExtractor={(itm, indx) => {
+          indx.toString();
+        }}
+        renderItem={({item, index}) => (
           <TouchableNativeFeedback
-            key={indx}
             onPress={() => {
               navigation.navigate('Electronics');
             }}>
             <View style={styles.box}>
-              <Image source={itm.img} style={{marginBottom: 5}} />
+              <View style={styles.img}>
+                <Image source={item.img} />
+              </View>
               <Text
                 style={{
                   color: '#98817b',
                   fontFamily: 'bariol_regular-webfont',
                   fontSize: 17,
+                  //width: '100%',
+                  marginTop: 8,
+                  alignSelf: 'center',
                 }}>
-                {itm.title}
+                {item.title}
               </Text>
             </View>
           </TouchableNativeFeedback>
-        ))}
-      </ScrollView>
+        )}
+      />
     </SafeAreaView>
   );
 };
@@ -139,23 +148,29 @@ const styles = StyleSheet.create({
   },
   head: {
     backgroundColor: '#FFFFFF',
-    height: 70,
+    height: 64,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderColor: 'rgba(232,232,232,1)',
   },
   box: {
-    width: '30%',
-    height: 113,
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
     justifyContent: 'center',
-    marginLeft: 10,
-    marginBottom: 10,
+    height: 107,
+    width: 107,
+    marginBottom: 9,
+    marginRight: 9,
+    shadowColor: 'rgba(0,0,0,0.07)',
+    shadowRadius: 3,
+    borderWidth: 1,
+    borderColor: '#fff',
   },
-  Image: {
-    width: 50,
-    height: 50,
+  img: {
+    width: 41,
+    height: 41,
     justifyContent: 'center',
   },
 });
