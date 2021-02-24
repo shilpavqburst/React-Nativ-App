@@ -66,103 +66,136 @@ const arr = [
 const Profile = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
-      <StatusBar barStyle="dark-content" />
-
-      <View style={styles.container}></View>
-      <ImageBackground
-        style={styles.bg}
-        source={require('../assets/images/bg.png')}>
-        <View style={styles.head}>
-          <Text
-            style={{
-              fontFamily: 'bariol_regular-webfont',
-              fontSize: 30,
-              color: 'rgba(255,121,86,1)',
-              //margin: 20,
-            }}>
-            profile
-          </Text>
-        </View>
+      <View style={styles.head}>
         <Image
-          style={styles.logo}
-          source={require('../assets/images/profile_pic.png')}
-        />
-        <Text
           style={{
-            color: '#98817b',
-            fontSize: 18,
-            top: 30,
-            marginLeft: 50,
-            fontFamily: 'bariol_regular-webfont',
-          }}>
-          edit image
-        </Text>
-        <View
-          style={{flexDirection: 'column', marginLeft: 180, marginTop: -70}}>
-          <Text style={styles.small}>username</Text>
-          <Text style={styles.big}>jennifer smith</Text>
-          <Text style={styles.small}>{'\n'}email id</Text>
-          <Text style={styles.big}>jenni@qburst.com</Text>
-          <Text style={styles.small}>{'\n'}mobile</Text>
-          <Text style={styles.big}>+91 98950 66224</Text>
-          <Text style={styles.small}>{'\n'}address</Text>
-          <Text style={styles.big}>
-            qburst technologies Inforpark, kakkanad kochi
-          </Text>
-        </View>
-      </ImageBackground>
-      <View
-        style={{backgroundColor: '#FFFFFF', top: 230, height: 50, margin: 0.5}}>
-        <Text
-          style={{
-            fontFamily: 'bariol_regular-webfont',
-            fontSize: 22,
-            top: 8,
+            height: 18,
+            width: 17,
+            marginTop: 33,
+            marginBottom: 13,
             marginLeft: 10,
-            color: '#98817b',
+            alignSelf: 'flex-start',
+          }}
+          source={require('../assets/images/logout_icn.png')}></Image>
+        <Text
+          style={{
+            fontFamily: 'bariol_regular-webfont',
+            fontSize: 30,
+            color: 'rgba(255,121,86,1)',
+            marginTop: 33,
+            marginBottom: 12,
+            //marginRight: 122,
+            alignSelf: 'center',
           }}>
-          my ads
+          profile
         </Text>
+        <Image
+          style={{
+            height: 19,
+            width: 19,
+            marginRight: 9,
+            marginTop: 33,
+            marginBottom: 12,
+          }}
+          source={require('../assets/images/edit_icn.png')}></Image>
       </View>
       <ScrollView
         style={{
-          marginTop: 220,
-          // paddingTop: 230,
-          // flex: 1,
-          backgroundColor: '#000',
+          // marginTop: 63,
+          backgroundColor: 'rgba(222,222,222,0.75)',
+          height: '100%',
         }}>
-        {arr.map((itm, indx) => (
-          <View style={styles.box} key={indx}>
+        <View style={{height: 280}}>
+          <ImageBackground
+            style={styles.bg}
+            source={require('../assets/images/bg.png')}>
+            <Image
+              style={styles.logo}
+              source={require('../assets/images/profile_pic.png')}
+            />
+            <Text
+              style={{
+                color: '#98817b',
+                fontSize: 18,
+                marginTop: 9,
+                marginLeft: 50,
+                fontFamily: 'bariol_light-webfont',
+              }}>
+              edit image
+            </Text>
             <View
               style={{
-                width: 50,
-                height: 50,
-                //borderRightWidth: 0.5,
-                // borderColor: '#C1C1C1',
-                justifyContent: 'center',
+                flexDirection: 'column',
+                marginLeft: 177,
+                marginTop: -115,
               }}>
-              <Image source={itm.img} style={{height: 55, width: 55}} />
+              <Text style={styles.small}>username</Text>
+              <Text style={styles.big}>jennifer smith</Text>
+              <Text style={styles.small}>email id</Text>
+              <Text style={styles.big}>jenni@qburst.com</Text>
+              <Text style={styles.small}>mobile</Text>
+              <Text style={styles.big}>+91 98950 66224</Text>
+              <Text style={styles.small}>address</Text>
+              <Text style={styles.big}>
+                qburst technologies Inforpark, kakkanad kochi
+              </Text>
             </View>
+          </ImageBackground>
+        </View>
+        <View
+          style={{
+            backgroundColor: '#FFFFFF',
+            //marginTop: 343,
+            height: 40,
+            margin: 0.5,
+          }}>
+          <Text
+            style={{
+              fontFamily: 'bariol_regular-webfont',
+              fontSize: 22,
+              marginTop: 9,
+              marginBottom: 9,
+              marginLeft: 10,
+              color: '#98817b',
+            }}>
+            my ads
+          </Text>
+        </View>
 
-            <View style={{width: 290, padding: 15}}>
-              <Text
+        {arr.map((itm, indx) => (
+          <View style={styles.box} key={indx}>
+            <View style={{flexDirection: 'row'}}>
+              <View
                 style={{
-                  color: '#98817b',
-                  fontFamily: 'bariol_regular-webfont',
-                  fontSize: 20,
+                  justifyContent: 'center',
+                  marginTop: 9,
+                  marginBottom: 9,
+                  //marginLeft: 9,
                 }}>
-                {itm.title}
-              </Text>
-              <Text
-                style={{
-                  color: '#98817b',
-                  fontFamily: 'bariol_regular-webfont',
-                  fontSize: 14,
-                }}>
-                {itm.basetext}
-              </Text>
+                <Image source={itm.img} style={{height: 55, width: 55}} />
+              </View>
+
+              <View
+                style={{width: 290, marginLeft: 9, justifyContent: 'center'}}>
+                <Text
+                  style={{
+                    color: '#98817b',
+                    fontFamily: 'bariol_regular-webfont',
+                    fontSize: 20,
+                  }}>
+                  {itm.title}
+                </Text>
+                <Text
+                  style={{
+                    color: '#98817b',
+                    fontFamily: 'bariol_regular-webfont',
+                    fontSize: 14,
+                  }}>
+                  {itm.basetext}
+                </Text>
+              </View>
             </View>
-            <View>
+            <View style={{right: 15, position: 'absolute'}}>
               <Image source={itm.img2} />
             </View>
           </View>
@@ -175,26 +208,26 @@ const styles = StyleSheet.create({
   scrollView: {
     // flex: 1,
   },
-  container: {
-    marginLeft: 40,
-    height: 150,
-  },
+
   bg: {
     position: 'absolute',
     width: '100%',
-    height: '100%',
+    height: 280,
   },
   head: {
     backgroundColor: '#FFFFFF',
     height: 70,
-    width: '100%',
+    // width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderColor: 'rgba(232,232,232,1)',
+    flexDirection: 'row',
   },
   logo: {
     width: 70,
     height: 70,
-    top: 20,
+    marginTop: 21,
     alignItems: 'center',
     marginLeft: 50,
   },
@@ -207,6 +240,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'bariol_light-webfont',
     color: '#98817b',
+    marginTop: 9,
   },
   big: {
     fontSize: 20,
@@ -218,12 +252,13 @@ const styles = StyleSheet.create({
     height: 65,
     alignItems: 'center',
     // margin: 0.5,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'rgba(255,255,255,0.4)',
     flexDirection: 'row',
-    padding: 20,
-    borderColor: '#C1C1C1',
+    padding: 9,
+    borderColor: 'rgba(222,222,222,0.75)',
     borderWidth: 0.5,
     opacity: 0.98,
+    justifyContent: 'space-between',
   },
 });
 
