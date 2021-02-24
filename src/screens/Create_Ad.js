@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Switch, TouchableOpacity} from 'react-native';
-
 import ImagePicker from 'react-native-image-crop-picker';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
   SafeAreaView,
@@ -10,7 +10,6 @@ import {
   View,
   Text,
   TextInput,
-  StatusBar,
   Image,
   ImageBackground,
   TouchableNativeFeedback,
@@ -38,63 +37,83 @@ const Create_Ad = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <StatusBar barStyle="dark-content" />
-
-      <View style={styles.container}></View>
-      <ImageBackground
-        style={styles.bg}
-        source={require('../assets/images/bg.png')}>
-        <View style={styles.head}>
-          <Text
-            style={{
-              fontFamily: 'bariol_regular-webfont',
-              fontSize: 30,
-              color: 'rgba(255,121,86,1)',
-              //margin: 20,
-            }}>
-            create ad
-          </Text>
-        </View>
+      <View style={styles.head}>
         <Text
           style={{
-            color: '#98817b',
-            fontSize: 18,
-            top: 20,
-            marginLeft: 30,
             fontFamily: 'bariol_regular-webfont',
+            fontSize: 30,
+            color: 'rgba(255,121,86,1)',
+            //margin: 20,
+            marginTop: 28,
+            marginBottom: 6,
           }}>
-          add photographs
+          create ad
         </Text>
-        {/*<TouchableOpacity onPress={takePhotoFromGallery}>
-          <View>
-            <Image
-              style={styles.logo}
-              source={require('../assets/images/addimage_icn.png')}
-            />
-          </View>
-        </TouchableOpacity>*/}
-        <View
-          style={{
-            flexDirection: 'row',
-            marginTop: 40,
-            alignItems: 'center',
-            marginLeft: 10,
-          }}>
-          {imageSRC.length != 4 && (
-            <TouchableOpacity onPress={takePhotoFromGallery}>
-              <Image
-                style={[styles.logo]}
-                source={require('../assets/images/addimage_icn.png')}
-              />
-            </TouchableOpacity>
-          )}
-          {imageSRC.length != 0 &&
-            imageSRC?.map((itm, indx) => (
-              <Image key={indx} style={[styles.images]} source={{uri: itm}} />
-            ))}
-        </View>
-      </ImageBackground>
+      </View>
       <ScrollView style={styles.maincontainer}>
+        <View style={styles.container}>
+          <ImageBackground
+            style={styles.bg}
+            source={require('../assets/images/bg.png')}>
+            <Text
+              style={{
+                color: '#98817b',
+                fontSize: 18,
+                marginTop: 20,
+                marginLeft: 20,
+                fontFamily: 'bariol_regular-webfont',
+              }}>
+              add photographs
+            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                marginTop: 16,
+                alignItems: 'center',
+                marginLeft: 22,
+              }}>
+              {imageSRC.length != 4 && (
+                <TouchableOpacity
+                  style={{
+                    alignItems: 'center',
+                    height: 60,
+                    width: 60,
+                    backgroundColor: '#fff',
+                  }}
+                  onPress={takePhotoFromGallery}>
+                  <Image
+                    style={[styles.logo]}
+                    source={require('../assets/images/addimage_icn.png')}
+                  />
+                </TouchableOpacity>
+              )}
+              {imageSRC.length != 0 &&
+                imageSRC?.map((itm, indx) => (
+                  <View>
+                    <ImageBackground
+                      key={indx}
+                      style={[styles.images]}
+                      source={{uri: itm}}>
+                      <TouchableOpacity
+                        onPress={() => {
+                          console.warn('ss');
+                        }}>
+                        <Icon
+                          name="times-circle"
+                          size={15}
+                          style={{
+                            color: '#fff',
+                            alignSelf: 'flex-end',
+                          }}
+                        />
+                      </TouchableOpacity>
+                    </ImageBackground>
+                  </View>
+                ))}
+            </View>
+          </ImageBackground>
+        </View>
+
         <TextInput
           placeholder="product title"
           style={styles.TextInputStyleClass}
@@ -108,7 +127,7 @@ const Create_Ad = ({navigation}) => {
           style={styles.TextInputStyleClass}
         />
         <TextInput placeholder="price" style={styles.TextInputStyleClass} />
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text style={styles.TextStyleClass}>negotiable</Text>
 
           <Switch
@@ -117,9 +136,10 @@ const Create_Ad = ({navigation}) => {
             ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitch1}
             value={isEnabled1}
+            style={{marginRight: 30}}
           />
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text style={styles.TextStyleClass}>feature the product</Text>
           <Switch
             trackColor={{false: '#e8e8e8', true: '#31ea92'}}
@@ -127,6 +147,7 @@ const Create_Ad = ({navigation}) => {
             ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitch2}
             value={isEnabled2}
+            style={{marginRight: 30}}
           />
         </View>
         <TextInput
@@ -157,7 +178,7 @@ const styles = StyleSheet.create({
     // flex: 1,
   },
   container: {
-    marginLeft: 40,
+    //marginLeft: 40,
     height: 150,
   },
   bg: {
@@ -171,24 +192,23 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderColor: 'rgba(232,232,232,1)',
   },
   logo: {
-    width: 50,
-    height: 45,
-    marginLeft: 20,
+    width: 31,
+    height: 27,
+    marginLeft: 15,
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    marginRight: 14,
+    marginBottom: 16,
+    marginTop: 17,
   },
-  panelButton: {
-    alignItems: 'center',
-    width: 50,
-    marginLeft: 30,
-  },
+
   maincontainer: {
     backgroundColor: '#FFFFFF',
     width: '100%',
     height: '100%',
-    marginTop: 50,
   },
 
   TextInputStyleClass: {
@@ -197,13 +217,18 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginLeft: 30,
     height: 40,
-    width: '85%',
+    //width: wp(45),
     borderWidth: 1,
     borderColor: '#f3e6df',
     borderRadius: 20,
     backgroundColor: '#FFFFFF',
     fontFamily: 'bariol_light-webfont',
     top: 20,
+    marginRight: 30,
+    paddingLeft: 20,
+    paddingTop: 11,
+    paddingBottom: 11,
+    //justifyContent: 'space-between',
   },
   button: {
     fontSize: 20,
@@ -215,20 +240,23 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginLeft: 30,
     height: 40,
-    width: '85%',
+    //width: '85%',
     borderWidth: 0.1,
     top: 20,
     borderColor: '#000000',
     borderRadius: 20,
     backgroundColor: '#FF7F50',
+    marginRight: 30,
+    marginBottom: 43,
   },
   TextStyleClass: {
-    textAlign: 'left',
+    // textAlign: 'left',
     marginBottom: 20,
+
     fontSize: 22,
-    marginLeft: 30,
+    marginLeft: 50,
     height: 40,
-    width: '70%',
+    // width: '70%',
 
     backgroundColor: '#FFFFFF',
     fontFamily: 'bariol_light-webfont',
