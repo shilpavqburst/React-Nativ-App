@@ -1,5 +1,6 @@
-import React from 'react';
-
+import React, {useState} from 'react';
+import DropDownPicker from 'react-native-dropdown-picker';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   SafeAreaView,
   StyleSheet,
@@ -64,19 +65,45 @@ const arr = [
 ];
 
 const App = ({navigation}) => {
+  const [country, setCountry] = useState('ernakulam');
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <StatusBar barStyle="dark-content" />
+    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <View style={styles.head}>
+        <TouchableNativeFeedback
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Image
+            style={{
+              height: 18,
+              width: 10,
+              marginLeft: '3%',
+              marginTop: 33,
+              marginBottom: 12.97,
+            }}
+            source={require('../assets/images/titlebar_back_arrow.png')}></Image>
+        </TouchableNativeFeedback>
         <Text
           style={{
             fontFamily: 'bariol_regular-webfont',
             fontSize: 30,
             color: 'rgba(255,121,86,1)',
-            //margin: 20,
+            marginTop: 33,
+            marginBottom: 12.97,
           }}>
           speakers
         </Text>
+        <View>
+          <Image
+            style={{
+              height: 19,
+              width: 19,
+              marginRight: '3%',
+              marginTop: 33,
+              marginBottom: 12.97,
+            }}
+            source={require('../assets/images/search_lens.png')}></Image>
+        </View>
       </View>
 
       <ScrollView
@@ -86,6 +113,92 @@ const App = ({navigation}) => {
           //flexWrap: 'wrap',
           // top: 50,
         }}>
+        <View
+          style={{
+            paddingVertical: 5,
+            backgroundColor: 'rgba(248,248,248,1)',
+            // flexDirection: 'row',
+            justifyContent: 'center',
+            zIndex: 10,
+            borderBottomWidth: 1,
+            borderColor: 'rgba(231,231,231,1)',
+            height: 50,
+          }}>
+          <DropDownPicker
+            items={[
+              {
+                label: 'ernakulam',
+                value: 'ernakulam',
+                hidden: true,
+              },
+              {
+                label: 'trivandrum',
+                value: 'trivandrum',
+              },
+              {
+                label: 'thrissur',
+                value: 'thrissur',
+              },
+            ]}
+            defaultValue={country}
+            style={{
+              backgroundColor: 'rgba(248,248,248,1)',
+              borderWidth: 0,
+              width: 120,
+            }}
+            containerStyle={{zIndex: 20, position: 'absolute'}}
+            itemStyle={{
+              justifyContent: 'flex-start',
+            }}
+            globalTextStyle={{
+              fontSize: 18,
+              fontFamily: 'bariol_regular-webfont',
+              color: 'rgba(162,134,128,1)',
+              //left: -15,
+            }}
+            selectedLabelStyle={{marginLeft: -1}}
+            dropDownStyle={{
+              backgroundColor: '#fafafa',
+            }}
+            onOpen={() => {}}
+            onClose={() => {}}
+            customArrowDown={(size) => (
+              <Icon name="caret-down" size={15} style={{top: 2}} />
+            )}
+            onChangeItem={(item) => setCountry(item.value)}
+          />
+          <View style={{flexDirection: 'row', alignSelf: 'flex-end'}}>
+            <Image
+              style={{
+                height: 21,
+                width: 21,
+                //alignSelf: 'flex-end',
+                marginRight: 20,
+                marginTop: 15,
+                marginBottom: 15,
+              }}
+              source={require('../assets/images/filter_icn.png')}
+            />
+            <TouchableNativeFeedback
+              onPress={() => {
+                navigation.navigate('Speaker Gridview');
+              }}>
+              <Image
+                style={{
+                  height: 20,
+                  width: 20,
+                  //alignSelf: 'flex-end',
+                  // alignItems: 'center',
+                  //justifyContent: 'center',
+                  marginRight: 10,
+                  marginTop: 15,
+                  marginBottom: 15,
+                }}
+                source={require('../assets/images/gridview_icn.png')}
+              />
+            </TouchableNativeFeedback>
+          </View>
+        </View>
         {arr.map((itm, indx) => (
           <TouchableNativeFeedback
             key={indx}
@@ -95,49 +208,67 @@ const App = ({navigation}) => {
             <View style={styles.box}>
               <View
                 style={{
-                  width: 50,
-                  height: 50,
-                  //borderRightWidth: 0.5,
-                  //borderColor: '#C1C1C1',
-                  justifyContent: 'center',
+                  marginLeft: 9,
+                  marginBottom: 9,
+                  marginTop: 9,
+                  zIndex: 1,
                 }}>
-                <Image source={itm.img} style={{height: 80, width: 80}} />
+                <Image source={itm.img} style={{height: 70, width: 70}} />
               </View>
 
-              <View style={{width: 220, paddingLeft: 40}}>
-                <Text
-                  style={{
-                    color: '#98817b',
-                    fontFamily: 'bariol_regular-webfont',
-                    fontSize: 20,
-                    width: 300,
-                  }}>
-                  {itm.title}
-                </Text>
-                <Text
-                  style={{
-                    color: '#98817b',
-                    fontFamily: 'bariol_regular-webfont',
-                    fontSize: 14,
-                  }}>
-                  {itm.basetext}
-                </Text>
+              <View style={{marginLeft: 10}}>
+                <View style={{marginTop: 10}}>
+                  <Text
+                    style={{
+                      color: '#98817b',
+                      fontFamily: 'bariol_regular-webfont',
+                      fontSize: 20,
+                      // width: 300,
+                      //marginTop: 10,
+                    }}>
+                    {itm.title}
+                  </Text>
+                  <Text
+                    style={{
+                      color: '#98817b',
+                      fontFamily: 'bariol_regular-webfont',
+                      fontSize: 14,
+                    }}>
+                    {itm.basetext}
+                  </Text>
+                </View>
                 <Text
                   style={{
                     color: '#FF7F50',
                     fontFamily: 'bariol_regular-webfont',
                     fontSize: 20,
+                    marginTop: 10,
+                    marginBottom: 13,
                   }}>
                   {itm.price}
                 </Text>
               </View>
-              <View style={{flexDirection: 'row', top: 35}}>
-                <Image style={{top: 3}} source={itm.img2} />
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginBottom: 11,
+                  //marginRight: 10,
+                  position: 'absolute',
+                  right: 10,
+                  bottom: 0,
+                }}>
+                <Image
+                  style={{height: 10.57, width: 10.57}}
+                  source={itm.img2}
+                />
                 <Text
                   style={{
                     color: '#98817b',
                     fontFamily: 'bariol_regular-webfont',
                     fontSize: 14,
+                    marginRight: 10,
+                    // marginLeft: 2,
+                    bottom: 2,
                   }}>
                   {itm.time}
                 </Text>
@@ -159,21 +290,26 @@ const styles = StyleSheet.create({
   },
   head: {
     backgroundColor: '#FFFFFF',
-    height: 70,
+    height: 64,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderColor: 'rgba(232,232,232,1)',
   },
   box: {
     width: '100%',
-    height: 100,
+    height: 88,
     alignItems: 'center',
     margin: 0.5,
     backgroundColor: '#FFFFFF',
     flexDirection: 'row',
-    padding: 10,
+    // padding: 10,
     borderColor: '#FFFFFF',
+    zIndex: 1,
   },
 });
 
 export default App;
+
