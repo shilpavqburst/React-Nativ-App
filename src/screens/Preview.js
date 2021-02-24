@@ -1,6 +1,5 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
-
 import {
   SafeAreaView,
   StyleSheet,
@@ -188,6 +187,8 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderColor: 'rgba(232,232,232,1)',
   },
 
   images: {
