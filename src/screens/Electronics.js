@@ -1,5 +1,4 @@
 import React from 'react';
-import {LoginButton, AccessToken} from 'react-native-fbsdk';
 import {
   SafeAreaView,
   StyleSheet,
@@ -78,17 +77,42 @@ const arr = [
 const App = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
-      <StatusBar barStyle="dark-content" />
       <View style={styles.head}>
+        <TouchableNativeFeedback
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Image
+            style={{
+              height: 18,
+              width: 10,
+              marginLeft: 10,
+              marginBottom: 13,
+              marginTop: 33,
+            }}
+            source={require('../assets/images/titlebar_back_arrow.png')}></Image>
+        </TouchableNativeFeedback>
         <Text
           style={{
             fontFamily: 'bariol_regular-webfont',
             fontSize: 30,
             color: 'rgba(255,121,86,1)',
-            //margin: 20,
+            marginBottom: 12,
+            marginTop: 33,
           }}>
           electronics
         </Text>
+        <View>
+          <Image
+            style={{
+              height: 19,
+              width: 19,
+              marginRight: 9,
+              marginTop: 33,
+              marginBottom: 12,
+            }}
+            source={require('../assets/images/search_lens.png')}></Image>
+        </View>
       </View>
 
       <ScrollView
@@ -104,36 +128,37 @@ const App = ({navigation}) => {
               navigation.navigate('Speakers');
             }}>
             <View style={styles.box}>
-              <View
-                style={{
-                  width: 50,
-                  height: 50,
-                  borderRightWidth: 0.5,
-                  borderColor: '#C1C1C1',
-                  justifyContent: 'center',
-                }}>
-                <Image source={itm.img} style={{}} />
-              </View>
-
-              <View style={{width: 290, padding: 15}}>
-                <Text
+              <View style={{flexDirection: 'row'}}>
+                <View
                   style={{
-                    color: '#98817b',
-                    fontFamily: 'bariol_regular-webfont',
-                    fontSize: 20,
+                    width: 50,
+                    height: 50,
+                    borderRightWidth: 0.5,
+                    borderColor: 'rgba(242,242,242,1)',
+                    justifyContent: 'center',
                   }}>
-                  {itm.title}
-                </Text>
-                <Text
-                  style={{
-                    color: '#98817b',
-                    fontFamily: 'bariol_regular-webfont',
-                    fontSize: 14,
-                  }}>
-                  {itm.basetext}
-                </Text>
+                  <Image source={itm.img} style={{}} />
+                </View>
+                <View style={{width: 200, padding: 15}}>
+                  <Text
+                    style={{
+                      color: '#98817b',
+                      fontFamily: 'bariol_regular-webfont',
+                      fontSize: 20,
+                    }}>
+                    {itm.title}
+                  </Text>
+                  <Text
+                    style={{
+                      color: '#98817b',
+                      fontFamily: 'bariol_regular-webfont',
+                      fontSize: 14,
+                    }}>
+                    {itm.basetext}
+                  </Text>
+                </View>
               </View>
-              <View>
+              <View style={{}}>
                 <Image source={itm.img2} />
               </View>
             </View>
@@ -153,10 +178,14 @@ const styles = StyleSheet.create({
   },
   head: {
     backgroundColor: '#FFFFFF',
-    height: 70,
+    height: 64,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    //justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderColor: 'rgba(232,232,232,1)',
   },
   box: {
     width: '100%',
@@ -167,6 +196,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 20,
     borderColor: '#FFFFFF',
+    justifyContent: 'flex-start',
+    // alignSelf: 'flex-end',
+    marginRight: 20,
+    justifyContent: 'space-between',
   },
 });
 
