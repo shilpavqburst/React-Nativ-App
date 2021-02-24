@@ -1,4 +1,5 @@
 import React from 'react';
+import SearchBar from 'react-native-dynamic-search-bar';
 import {
   SafeAreaView,
   StyleSheet,
@@ -81,21 +82,34 @@ const Favourite = () => {
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="dark-content" />
       <View style={styles.head}>
+        <View />
         <Text
           style={{
             fontFamily: 'bariol_regular-webfont',
             fontSize: 30,
             color: 'rgba(255,121,86,1)',
-            //margin: 20,
+            // marginLeft: 130,
+            marginBottom: 12.97,
+            marginTop: 33,
           }}>
           favourites
         </Text>
+
+        <Image
+          style={{
+            height: 18.03,
+            width: 18.03,
+            marginRight: 9.97,
+            marginTop: 33,
+            marginBottom: 12.97,
+          }}
+          source={require('../assets/images/search_lens.png')}
+        />
       </View>
 
       <ScrollView
         style={{backgroundColor: '#e8e8e8'}}
         contentContainerStyle={{
-          flexDirection: 'column',
           flexWrap: 'wrap',
         }}>
         {arr.map((itm, indx) => (
@@ -104,46 +118,77 @@ const Favourite = () => {
               style={{
                 width: 50,
                 height: 50,
-                //borderRightWidth: 0.5,
-                //borderColor: '#C1C1C1',
                 justifyContent: 'center',
               }}>
-              <Image source={itm.img} style={{height: 80, width: 80}} />
+              <Image
+                source={itm.img}
+                style={{
+                  height: 70,
+                  width: 70,
+                  marginLeft: 9,
+                  paddingRight: 10,
+                }}
+              />
             </View>
 
-            <View style={{width: '75%', paddingLeft: 40}}>
-              <Text
-                style={{
-                  color: '#98817b',
-                  fontFamily: 'bariol_regular-webfont',
-                  fontSize: 20,
-                }}>
-                {itm.title}
-              </Text>
-              <Text
-                style={{
-                  color: '#98817b',
-                  fontFamily: 'bariol_regular-webfont',
-                  fontSize: 14,
-                }}>
-                {itm.basetext}
-              </Text>
-              <Text
-                style={{
-                  color: '#FF7F50',
-                  fontFamily: 'bariol_regular-webfont',
-                  fontSize: 20,
-                }}>
-                {itm.price}
-              </Text>
+            <View
+              style={{
+                //width: '70%',
+                // paddingLeft: '10%',
+                marginTop: 10,
+                marginLeft: 40,
+              }}>
+              <View style={{marginTop: 8}}>
+                <Text
+                  style={{
+                    color: '#98817b',
+                    fontFamily: 'bariol_regular-webfont',
+                    fontSize: 20,
+                  }}>
+                  {itm.title}
+                </Text>
+                <Text
+                  style={{
+                    color: '#98817b',
+                    fontFamily: 'bariol_regular-webfont',
+                    fontSize: 14,
+                  }}>
+                  {itm.basetext}
+                </Text>
+              </View>
+              <View>
+                <Text
+                  style={{
+                    color: '#FF7F50',
+                    fontFamily: 'bariol_regular-webfont',
+                    fontSize: 20,
+                    marginBottom: 13,
+                    marginTop: 10,
+                  }}>
+                  {itm.price}
+                </Text>
+              </View>
             </View>
-            <View style={{flexDirection: 'row', top: 30, marginLeft: -30}}>
-              <Image style={{top: 3}} source={itm.img2} />
+
+            <View
+              style={{
+                flexDirection: 'row',
+                // marginTop: 60,
+                marginBottom: 11,
+                // justifyContent: 'flex-start',
+                position: 'absolute',
+                right: 10,
+                bottom: -5,
+                //marginTop: 61,
+              }}>
+              <Image style={{}} source={itm.img2} />
               <Text
                 style={{
+                  bottom: 2,
                   color: '#98817b',
                   fontFamily: 'bariol_regular-webfont',
                   fontSize: 14,
+                  //bottom: 2,
                 }}>
                 {itm.time}
               </Text>
@@ -164,19 +209,23 @@ const styles = StyleSheet.create({
   },
   head: {
     backgroundColor: '#FFFFFF',
-    height: 70,
+    height: 64,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderColor: 'rgba(232,232,232,1)',
   },
   box: {
     width: '100%',
-    height: 100,
+    height: 88,
     alignItems: 'center',
     margin: 0.5,
     backgroundColor: '#FFFFFF',
     flexDirection: 'row',
-    padding: 10,
+    // padding: 10,
     borderColor: '#FFFFFF',
   },
 });
