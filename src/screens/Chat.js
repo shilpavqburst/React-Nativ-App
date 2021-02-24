@@ -1,5 +1,4 @@
 import React from 'react';
-import {LoginButton, AccessToken} from 'react-native-fbsdk';
 import {
   SafeAreaView,
   StyleSheet,
@@ -65,7 +64,7 @@ const Chat = () => {
             fontFamily: 'bariol_regular-webfont',
             fontSize: 30,
             color: 'rgba(255,121,86,1)',
-            //margin: 20,
+            marginTop: 28,
           }}>
           chat
         </Text>
@@ -127,6 +126,8 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    borderBottomWidth: 1,
+    borderColor: 'rgba(232,232,232,1)',
   },
   box: {
     width: '100%',
