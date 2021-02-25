@@ -197,7 +197,7 @@ const App = ({navigation}) => {
             }}>
             <TouchableNativeFeedback
               onPress={() => {
-                Linking.openURL('tel:+8007172278');
+                Linking.openURL('tel:+XXXXXXXXXX');
               }}>
               <Image
                 style={{height: 70, width: 70, marginLeft: 20}}
