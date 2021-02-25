@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import SearchBar from 'react-native-dynamic-search-bar';
 import {
   SafeAreaView,
@@ -16,6 +16,7 @@ import {
   TouchableNativeFeedback,
 } from 'react-native';
 import {Header} from 'react-native/Libraries/NewAppScreen';
+import {set} from 'react-native-reanimated';
 
 const arr = [
   {
@@ -78,6 +79,29 @@ const arr = [
 ];
 
 const Favourite = () => {
+  const [showSearchBar, setSearchBar] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const [list, setList] = useState(arr);
+  const onClick = () => {
+    setSearchBar(!showSearchBar);
+    if (showSearchBar) {
+      setSearchText('');
+      setList(arr);
+    }
+  };
+
+  const onSearch = (text) => {
+    setSearchText(text);
+    if (text === '') {
+      setList(arr);
+    } else {
+      const temp = list.filter((itm) => {
+        if (itm.title.indexOf(text) > -1) return itm;
+      });
+      setList(temp);
+    }
+  };
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="dark-content" />
@@ -94,25 +118,35 @@ const Favourite = () => {
           }}>
           favourites
         </Text>
-
-        <Image
-          style={{
-            height: 18.03,
-            width: 18.03,
-            marginRight: 9.97,
-            marginTop: 33,
-            marginBottom: 12.97,
-          }}
-          source={require('../assets/images/search_lens.png')}
-        />
+        <View>
+          <TouchableOpacity onPress={onClick}>
+            <Image
+              style={{
+                height: 18.03,
+                width: 18.03,
+                marginRight: 9.97,
+                marginTop: 33,
+                marginBottom: 12.97,
+              }}
+              source={require('../assets/images/search_lens.png')}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
-
+      {showSearchBar && (
+        <SearchBar
+          style={{width: '100%'}}
+          placeholder="Search.."
+          value={searchText}
+          onChangeText={onSearch}
+        />
+      )}
       <ScrollView
         style={{backgroundColor: '#e8e8e8'}}
         contentContainerStyle={{
           flexWrap: 'wrap',
         }}>
-        {arr.map((itm, indx) => (
+        {list.map((itm, indx) => (
           <View style={styles.box}>
             <View
               style={{
@@ -231,3 +265,4 @@ const styles = StyleSheet.create({
 });
 
 export default Favourite;
+
