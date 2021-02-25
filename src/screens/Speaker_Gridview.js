@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import SearchBar from 'react-native-dynamic-search-bar';
 import {
   SafeAreaView,
   StyleSheet,
@@ -71,6 +72,29 @@ const arr = [
 
 const App = ({navigation}) => {
   const [country, setCountry] = useState('ernakulam');
+  const [showSearchBar, setSearchBar] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const [list, setList] = useState(arr);
+  const onClick = () => {
+    setSearchBar(!showSearchBar);
+    if (showSearchBar) {
+      setSearchText('');
+      setList(arr);
+    }
+  };
+
+  const onSearch = (text) => {
+    setSearchText(text);
+    if (text === '') {
+      setList(arr);
+    } else {
+      const temp = list.filter((itm) => {
+        if (itm.title.indexOf(text) > -1) return itm;
+      });
+      setList(temp);
+    }
+  };
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.head}>
@@ -99,17 +123,28 @@ const App = ({navigation}) => {
           speakers
         </Text>
         <View>
-          <Image
-            style={{
-              height: 19,
-              width: 19,
-              marginRight: '3%',
-              marginTop: 33,
-              marginBottom: 12.97,
-            }}
-            source={require('../assets/images/search_lens.png')}></Image>
+          <TouchableOpacity onPress={onClick}>
+            <Image
+              style={{
+                height: 19,
+                width: 19,
+                marginRight: '3%',
+                marginTop: 33,
+                marginBottom: 12.97,
+              }}
+              source={require('../assets/images/search_lens.png')}></Image>
+          </TouchableOpacity>
         </View>
       </View>
+      {showSearchBar && (
+        <SearchBar
+          style={{width: '100%'}}
+          placeholder="Search.."
+          value={searchText}
+          onChangeText={onSearch}
+        />
+      )}
+
       <ScrollView
         style={{backgroundColor: '#e8e8e8'}}
         contentContainerStyle={{
@@ -212,65 +247,71 @@ const App = ({navigation}) => {
               justifyContent: 'space-evenly',
               top: 15,
             }}>
-            {arr.map((itm, indx) => (
-              <View style={styles.box}>
-                <View>
-                  <ImageBackground
-                    source={itm.img}
-                    style={
-                      {
-                        //marginBottom: 5,
-                        // height: 185,
-                        // width: '100%',
-                      }
-                    }>
-                    <View
-                      style={{
-                        //width: '100%',
-                        paddingLeft: 45,
-                        backgroundColor: '#1d1d1d',
-                        marginTop: 145,
-                        //bottom: 20,
-                        //marginLeft: 5,
-                        height: 40,
-                        justifyContent: 'space-between',
-                      }}>
-                      <Text
+            {list.map((itm, indx) => (
+              <TouchableNativeFeedback
+                key={indx}
+                onPress={() => {
+                  navigation.navigate('Audio engine');
+                }}>
+                <View style={styles.box}>
+                  <View>
+                    <ImageBackground
+                      source={itm.img}
+                      style={
+                        {
+                          //marginBottom: 5,
+                          // height: 185,
+                          // width: '100%',
+                        }
+                      }>
+                      <View
                         style={{
-                          color: '#FFFFFF',
-                          fontFamily: 'bariol_regular-webfont',
-                          fontSize: 14,
-                          marginLeft: -40,
-                          top: 6,
+                          //width: '100%',
+                          paddingLeft: 45,
+                          backgroundColor: '#1d1d1d',
+                          marginTop: 145,
+                          //bottom: 20,
+                          //marginLeft: 5,
+                          height: 40,
+                          justifyContent: 'space-between',
                         }}>
-                        {itm.title}
-                      </Text>
-                      <Text
-                        style={{
-                          color: '#FFFFFF',
-                          fontFamily: 'bariol_regular-webfont',
-                          fontSize: 12,
-                          marginLeft: -40,
-                          top: 7,
-                        }}>
-                        {itm.basetext}
-                      </Text>
+                        <Text
+                          style={{
+                            color: '#FFFFFF',
+                            fontFamily: 'bariol_regular-webfont',
+                            fontSize: 14,
+                            marginLeft: -40,
+                            top: 6,
+                          }}>
+                          {itm.title}
+                        </Text>
+                        <Text
+                          style={{
+                            color: '#FFFFFF',
+                            fontFamily: 'bariol_regular-webfont',
+                            fontSize: 12,
+                            marginLeft: -40,
+                            top: 7,
+                          }}>
+                          {itm.basetext}
+                        </Text>
 
-                      <Text
-                        style={{
-                          color: '#FF7F50',
-                          fontFamily: 'bariol_regular-webfont',
-                          fontSize: 14,
-                          marginLeft: 75,
-                          bottom: 15,
-                          right: 5,
-                        }}>
-                        {itm.price}
-                      </Text>
-                    </View>
-                  </ImageBackground>
+                        <Text
+                          style={{
+                            color: '#FF7F50',
+                            fontFamily: 'bariol_regular-webfont',
+                            fontSize: 14,
+                            marginLeft: 75,
+                            bottom: 15,
+                            right: 5,
+                          }}>
+                          {itm.price}
+                        </Text>
+                      </View>
+                    </ImageBackground>
+                  </View>
                 </View>
-              </View>
+              </TouchableNativeFeedback>
             ))}
           </View>
         </ImageBackground>
