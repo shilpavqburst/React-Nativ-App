@@ -80,6 +80,10 @@ const App = ({navigation}) => {
         <Text style={styles.button}>REGISTER</Text>
         <Text style={styles.text}>
           already have an account?{'\t'}
+<<<<<<< HEAD
+=======
+          {'\t'}
+>>>>>>>  screens updated
           <TouchableNativeFeedback
             onPress={() => {
               navigation.navigate('Sign in');

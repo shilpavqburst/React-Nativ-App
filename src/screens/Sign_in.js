@@ -57,6 +57,10 @@ const Sign_in = ({navigation}) => {
         <Text style={styles.fp}>forgot password?</Text>
         <Text style={styles.text}>
           don't have an account?{'\t'}
+<<<<<<< HEAD
+=======
+          {'\t'}
+>>>>>>>  screens updated
           <TouchableNativeFeedback
             onPress={() => {
               navigation.navigate('Sign up');
@@ -144,10 +148,25 @@ const Sign_in = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+<<<<<<< HEAD
   container: {
     backgroundColor: '#FFFFFF',
     //flex: 1,
     // marginTop: 50,
+=======
+  scrollView: {
+    backgroundColor: '#FFFFFF',
+  },
+
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'column',
+    //justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+    backgroundColor: '#FFFFFF',
+>>>>>>>  screens updated
   },
   logo: {
     width: 261,

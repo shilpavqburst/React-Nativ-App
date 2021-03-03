@@ -67,6 +67,7 @@ const arr = [
 ];
 
 const App = ({navigation}) => {
+<<<<<<< HEAD
   const [country, setCountry] = useState('ernakulam');
 
   const [showSearchBar, setSearchBar] = useState(false);
@@ -92,6 +93,8 @@ const App = ({navigation}) => {
     }
   };
 
+=======
+>>>>>>>  screens updated
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <View style={styles.head}>
@@ -252,6 +255,7 @@ const App = ({navigation}) => {
                 <Image source={itm.img} style={{height: 70, width: 70}} />
               </View>
 
+<<<<<<< HEAD
               <View style={{marginLeft: 10}}>
                 <View style={{marginTop: 10}}>
                   <Text
@@ -273,6 +277,26 @@ const App = ({navigation}) => {
                     {itm.basetext}
                   </Text>
                 </View>
+=======
+              <View style={{width: 220, paddingLeft: 40}}>
+                <Text
+                  style={{
+                    color: '#98817b',
+                    fontFamily: 'bariol_regular-webfont',
+                    fontSize: 20,
+                    width: 300,
+                  }}>
+                  {itm.title}
+                </Text>
+                <Text
+                  style={{
+                    color: '#98817b',
+                    fontFamily: 'bariol_regular-webfont',
+                    fontSize: 14,
+                  }}>
+                  {itm.basetext}
+                </Text>
+>>>>>>>  screens updated
                 <Text
                   style={{
                     color: '#FF7F50',

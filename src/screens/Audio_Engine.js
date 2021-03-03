@@ -74,6 +74,7 @@ const App = ({navigation}) => {
             }}>
             <Image
               style={{
+<<<<<<< HEAD
                 height: 18,
                 width: 16,
                 //marginRight: 14,
@@ -125,6 +126,23 @@ const App = ({navigation}) => {
                   source={itm.img}
                   style={{height: 200, width: '100%'}}>
                   <View
+=======
+                width: '100%',
+                height: '100%',
+                justifyContent: 'center',
+                backgroundColor: '#FFFFFF',
+              }}>
+              <ImageBackground
+                source={itm.img}
+                style={{height: 300, width: '100%', top: 100}}>
+                <View
+                  style={{
+                    width: 310,
+                    top: 160,
+                    paddingLeft: 280,
+                  }}>
+                  <Text
+>>>>>>>  screens updated
                     style={{
                       position: 'absolute',
                       right: 10,
