@@ -34,7 +34,12 @@ const arr = [
   },
 ];
 
-const App = ({navigation}) => {
+const App = ({
+  navigation,
+  route: {
+    params: {data},
+  },
+}) => {
   return (
     <View style={{flex: 1}}>
       <View style={styles.head}>
@@ -65,7 +70,7 @@ const App = ({navigation}) => {
             alignSelf: 'center',
             marginRight: 40,
           }}>
-          audio engine
+          {data?.name}
         </Text>
         <View style={{flexDirection: 'row', marginRight: 10}}>
           <TouchableNativeFeedback
@@ -112,7 +117,7 @@ const App = ({navigation}) => {
             //top: 90,
             height: 200,
           }}>
-          {arr.map((itm, indx) => (
+          {data?.img?.map((itm, indx) => (
             <View style={styles.slideContainer}>
               <View
                 style={{
@@ -122,7 +127,7 @@ const App = ({navigation}) => {
                   backgroundColor: '#FFFFFF',
                 }}>
                 <ImageBackground
-                  source={itm.img}
+                  source={{uri: itm}}
                   style={{height: 200, width: '100%'}}>
                   <View
                     style={{
@@ -145,7 +150,7 @@ const App = ({navigation}) => {
                         borderWidth: 2,
                         borderColor: 'rgba(156,156,156,0.27)',
                       }}>
-                      {itm.amount}
+                      ₹{data.price}
                     </Text>
                   </View>
                 </ImageBackground>
@@ -160,7 +165,7 @@ const App = ({navigation}) => {
             backgroundColor: '#fff',
           }}>
           <Text style={styles.small}>product title</Text>
-          <Text style={styles.big}>audio engine a2+ speakers</Text>
+          <Text style={styles.big}>{data.name}</Text>
           <Text style={styles.small}>{'\n'}category</Text>
           <Text style={styles.big}>electronics</Text>
           <Text style={styles.small}>{'\n'}sub category</Text>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {
   SafeAreaView,
@@ -10,6 +10,9 @@ import {
   Image,
   ImageBackground,
 } from 'react-native';
+import storage from '@react-native-firebase/storage';
+import firestore from '@react-native-firebase/firestore';
+import {ActivityIndicator} from 'react-native';
 
 const arr = [
   {
@@ -28,51 +31,129 @@ const arr = [
 const arr1 = [
   {
     title: 'product title ',
-    basetext: 'audio engine a2+ speakers ',
+    basetext: 'name',
   },
   {
     title: 'category ',
-    basetext: 'electronics ',
+    basetext: 'category',
   },
   {
+    title: 'sub category ',
+    basetext: 'subCategory',
+  },
+
+  {
     title: 'seller type ',
-    basetext: 'agent',
+    basetext: 'sellerType',
   },
   {
     title: 'description',
-    basetext: 'audioengine speakers with superb sound imaging and quality',
+    basetext: 'desc',
   },
   {
     title: 'price',
-    basetext: '45,000',
+    basetext: 'price',
   },
   {
-    title: 'negotiable ',
-    basetext: 'yes',
+    title: 'time',
+    basetext: 'time',
+  },
+  {
+    title: 'negotiable',
+    basetext: 'negotiable',
   },
   {
     title: 'featured product',
-    basetext: 'no',
+    basetext: 'featured',
   },
   {
     title: 'location',
-    basetext: 'kochi, kerala',
+    basetext: 'loc',
   },
   {
     title: 'contact person',
-    basetext: 'mahesh sivasankaran',
+    basetext: 'sellerName',
   },
   {
     title: 'email id',
-    basetext: 'maheshs@qburst.com',
+    basetext: 'email',
   },
   {
     title: 'contact number',
-    basetext: '+91 9895066224',
+    basetext: 'phone',
+  },
+  {
+    title: 'image',
+    basetext: 'img',
   },
 ];
 
-const App = () => {
+const Preview = ({
+  navigation,
+  route: {
+    params: {item},
+  },
+}) => {
+  const [list, setList] = useState([]);
+  const [loading, setLoader] = useState(false);
+  useEffect(() => {
+    const subscription = firestore()
+      .collection('demo')
+      .onSnapshot((usersCollection) => {
+        const {data} = usersCollection.docs[0].data();
+        setList(data);
+      });
+    return () => subscription();
+  }, []);
+
+  const onSubmit = async () => {
+    setLoader(true);
+    // path to existing file on filesystem
+    let img = [];
+    for (let i = 0; i < item.img.length; i++) {
+      const pathToFile = item.img[i];
+      const fileName = pathToFile.split('Pictures/')[1];
+      const reference = storage().ref(fileName);
+      await reference
+        .putFile(pathToFile)
+        .then(async () => {})
+        .catch(() => {});
+      const url = await storage().ref(fileName).getDownloadURL();
+      img.push(url);
+    }
+
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].category.toLowerCase() === item.category.toLowerCase()) {
+        for (let j = 0; j < list[i].subCat.length; j++) {
+          if (
+            list[i].subCat[j].subCatName.toLowerCase() ===
+            item.subCategory.toLowerCase()
+          ) {
+            item.img = img;
+            item.time = new Date().toLocaleDateString();
+            list[i].subCat[j].items.push(item);
+            firestore()
+              .collection('demo')
+              .doc('Dct2zlGSUdH3OdmCTtca')
+              .update({data: list})
+              .then(() => {
+                console.warn('User updated!');
+              });
+          }
+        }
+      }
+    }
+    setLoader(false);
+    navigation.goBack();
+  };
+  if (loading) {
+    return (
+      <SafeAreaView
+        style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator color={'green'} />
+      </SafeAreaView>
+    );
+  }
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="dark-content" />
@@ -109,9 +190,10 @@ const App = () => {
 
             marginLeft: 20,
           }}>
-          {arr.map((itm) => (
+          {item.img.map((itm, indx) => (
             <Image
-              source={itm.img}
+              key={indx}
+              source={{uri: itm}}
               style={{height: 50, width: 50, flexDirection: 'row', margin: 10}}
             />
           ))}
@@ -119,27 +201,38 @@ const App = () => {
       </ImageBackground>
 
       <ScrollView style={styles.maincontainer}>
-        {arr1.map((itm) => (
-          <View style={{width: 350, padding: 15, marginLeft: 10}}>
-            <Text
-              style={{
-                color: '#98817b',
-                fontFamily: 'bariol_regular-webfont',
-                fontSize: 16,
-              }}>
-              {itm.title}
-            </Text>
-            <Text
-              style={{
-                color: '#98817b',
-                fontFamily: 'bariol_regular-webfont',
-                fontSize: 24,
-              }}>
-              {itm.basetext}
-            </Text>
-          </View>
-        ))}
-        <TouchableOpacity>
+        {arr1.map(
+          (itm, indx) =>
+            itm.title !== 'image' &&
+            itm.title !== 'time' && (
+              <View
+                key={indx}
+                style={{width: 350, padding: 15, marginLeft: 10}}>
+                <Text
+                  style={{
+                    color: '#98817b',
+                    fontFamily: 'bariol_regular-webfont',
+                    fontSize: 16,
+                  }}>
+                  {itm.title}
+                </Text>
+                <Text
+                  style={{
+                    color: '#98817b',
+                    fontFamily: 'bariol_regular-webfont',
+                    fontSize: 24,
+                  }}>
+                  {itm.title == 'featured product' ||
+                  itm.basetext == 'negotiable'
+                    ? item[itm.basetext]
+                      ? 'yes'
+                      : 'no'
+                    : item[itm.basetext]}
+                </Text>
+              </View>
+            ),
+        )}
+        <TouchableOpacity onPress={onSubmit}>
           <Text style={styles.button}>PUBLISH</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -204,4 +297,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Preview;

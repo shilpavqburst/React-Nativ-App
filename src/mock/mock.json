@@ -15,8 +15,14 @@
                             "time":"07:50pm",
                             "sellerType":"agent",
                             "category":"electronics",
+                            "subCategory":"",
                             "phone":"986848258",
-                            "img":[]
+                            "desc":"",
+                            "img":[],
+                            "negotiable":false,
+                            "featured":false,
+                            "sellerName":"",
+                            "email":""
                         }
                     ]
                 }

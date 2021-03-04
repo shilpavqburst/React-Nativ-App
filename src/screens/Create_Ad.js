@@ -17,6 +17,8 @@ import {
 } from 'react-native';
 import {FlatList} from 'react-native';
 import DropComponent from '../components/DropComponent';
+import {utils} from '@react-native-firebase/app';
+import storage from '@react-native-firebase/storage';
 
 const itm = {
   name: '',
@@ -31,6 +33,9 @@ const itm = {
   negotiable: false,
   featured: false,
   desc: '',
+  email: '',
+  sellerName: '',
+  time: '',
 };
 
 const catSelect = [
@@ -84,27 +89,40 @@ const sellerTypeSelect = ['agent', 'self'];
 const Create_Ad = ({navigation}) => {
   const [item, setItem] = useState(itm);
 
-  const [imageSRC, setImageSRC] = useState([]);
-
   const takePhotoFromGallery = () => {
     ImagePicker.openPicker({
       width: 300,
       height: 400,
       cropping: true,
     }).then((image) => {
-      let temp = imageSRC;
+      let temp = item.img;
       temp.push(image.path);
-      setImageSRC([...temp]);
-      console.warn(image.path);
+      onItemValueChange(temp, 'img');
     });
   };
 
   const onItemValueChange = (txt, value) => {
-    console.warn(txt);
     const temp = item;
     temp[value] = txt;
     setItem({...temp});
   };
+
+  const navigTo = () => {
+    console.warn(item);
+    if (
+      (item.name == '' && item.desc == '',
+      item.img.length === 0 && item.loc == '',
+      item.price == '' && item.sellerName == '',
+      item.sellerType == '' && item.subCategory == '',
+      item.category == '' && item.phone == '',
+      item.email == '')
+    )
+      alert('All fields are required!');
+    else {
+      navigation.navigate('Preview', {item});
+    }
+  };
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.head}>
@@ -142,7 +160,7 @@ const Create_Ad = ({navigation}) => {
                 alignItems: 'center',
                 marginLeft: 22,
               }}>
-              {imageSRC.length != 4 && (
+              {item.img.length != 4 && (
                 <TouchableOpacity
                   style={{
                     alignItems: 'center',
@@ -157,8 +175,8 @@ const Create_Ad = ({navigation}) => {
                   />
                 </TouchableOpacity>
               )}
-              {imageSRC.length != 0 &&
-                imageSRC?.map((itm, indx) => (
+              {item.img.length != 0 &&
+                item.img?.map((itm, indx) => (
                   <View>
                     <ImageBackground
                       key={indx}
@@ -220,7 +238,12 @@ const Create_Ad = ({navigation}) => {
           onChangeText={(text) => onItemValueChange(text, 'desc')}
           style={styles.TextInputStyleClass}
         />
-        <TextInput placeholder="price" style={styles.TextInputStyleClass} />
+        <TextInput
+          placeholder="price"
+          style={styles.TextInputStyleClass}
+          value={item.price}
+          onChangeText={(text) => onItemValueChange(text, 'price')}
+        />
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text style={styles.TextStyleClass}>negotiable</Text>
 
@@ -249,20 +272,28 @@ const Create_Ad = ({navigation}) => {
         <TextInput
           placeholder="select location"
           style={styles.TextInputStyleClass}
+          value={item.loc}
+          onChangeText={(text) => onItemValueChange(text, 'loc')}
         />
         <TextInput
           placeholder="contact person"
           style={styles.TextInputStyleClass}
+          value={item.sellerName}
+          onChangeText={(text) => onItemValueChange(text, 'sellerName')}
         />
-        <TextInput placeholder="email id" style={styles.TextInputStyleClass} />
+        <TextInput
+          placeholder="email id"
+          style={styles.TextInputStyleClass}
+          value={item.email}
+          onChangeText={(text) => onItemValueChange(text, 'email')}
+        />
         <TextInput
           placeholder="contact number"
           style={styles.TextInputStyleClass}
+          value={item.phone}
+          onChangeText={(text) => onItemValueChange(text, 'phone')}
         />
-        <TouchableNativeFeedback
-          onPress={() => {
-            navigation.navigate('Preview');
-          }}>
+        <TouchableNativeFeedback onPress={navigTo}>
           <Text style={styles.button}>PREVIEW</Text>
         </TouchableNativeFeedback>
       </ScrollView>

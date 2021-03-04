@@ -6,7 +6,6 @@ import Sign_up from '../screens/Sign_up';
 import Dashboard from '../screens/Dashboard';
 import Electronics from '../screens/Electronics';
 import Speakers from '../screens/Speakers';
-import Speaker_Gridview from '../screens/Speaker_Gridview';
 import Location from '../screens/Location';
 import Create_Ad from '../screens/Create_Ad';
 import Preview from '../screens/Preview';
@@ -28,7 +27,6 @@ function DashbaordTab() {
       <Stack.Screen name="Dashboard" component={Dashboard} />
       <Stack.Screen name="Electronics" component={Electronics} />
       <Stack.Screen name="Speakers" component={Speakers} />
-      <Stack.Screen name="Speaker Gridview" component={Speaker_Gridview} />
 
       <Stack.Screen name="Location" component={Location} />
     </Stack.Navigator>

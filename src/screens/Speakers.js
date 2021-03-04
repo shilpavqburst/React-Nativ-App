@@ -13,6 +13,7 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
   ImageBackground,
+  Dimensions,
 } from 'react-native';
 
 const arr = [
@@ -78,7 +79,7 @@ const App = ({
   const [showSearchBar, setSearchBar] = useState(false);
   const [grid, setGrid] = useState(false);
   const [searchText, setSearchText] = useState('');
-  const [list, setList] = useState(arr);
+  const [list, setList] = useState(data);
   const onClick = () => {
     setSearchBar(!showSearchBar);
     if (showSearchBar) {
@@ -244,86 +245,159 @@ const App = ({
           </View>
         </View>
         <ImageBackground
-          style={{height: '100%', width: '100%'}}
+          style={{flex: 1}}
           source={require('../assets/images/bg.png')}>
-          {list.length !== 0 &&
-            list.map((itm, indx) => (
-              <TouchableNativeFeedback
-                key={indx}
-                onPress={() => {
-                  navigation.navigate('Audio engine');
-                }}>
-                <View style={grid ? styles.gridbox : styles.box}>
-                  <View
-                    style={{
-                      marginLeft: 9,
-                      marginBottom: 9,
-                      marginTop: 9,
-                      zIndex: 1,
-                    }}>
-                    <Image source={itm.img} style={{height: 70, width: 70}} />
-                  </View>
+          {list.length !== 0 ? (
+            <View
+              style={{
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                justifyContent: 'space-evenly',
+              }}>
+              {list.map((itm, indx) => (
+                <TouchableNativeFeedback
+                  key={indx}
+                  onPress={() => {
+                    navigation.navigate('Audio engine', {data: itm});
+                  }}>
+                  {grid ? (
+                    <View style={styles.gridbox}>
+                      <View>
+                        <ImageBackground
+                          source={{uri: itm.img[0]}}
+                          style={
+                            {
+                              //marginBottom: 5,
+                              // height: 185,
+                              // width: '100%',
+                            }
+                          }>
+                          <View style={styles.gridtext}>
+                            <Text
+                              style={{
+                                color: '#FFFFFF',
+                                fontFamily: 'bariol_regular-webfont',
+                                fontSize: 14,
+                                marginLeft: -40,
+                                top: 6,
+                              }}>
+                              {itm.name}
+                            </Text>
+                            <Text
+                              style={{
+                                color: '#FFFFFF',
+                                fontFamily: 'bariol_regular-webfont',
+                                fontSize: 12,
+                                marginLeft: -40,
+                                top: 7,
+                              }}>
+                              {itm.loc}
+                            </Text>
 
-                  <View style={grid ? styles.gridtext : styles.listtext}>
-                    <View style={{marginTop: 10}}>
-                      <Text
-                        style={{
-                          color: '#98817b',
-                          fontFamily: 'bariol_regular-webfont',
-                          fontSize: 20,
-                          // width: 300,
-                          //marginTop: 10,
-                        }}>
-                        {itm.title}
-                      </Text>
-                      <Text
-                        style={{
-                          color: '#98817b',
-                          fontFamily: 'bariol_regular-webfont',
-                          fontSize: 14,
-                        }}>
-                        {itm.basetext}
-                      </Text>
+                            <Text
+                              style={{
+                                color: '#FF7F50',
+                                fontFamily: 'bariol_regular-webfont',
+                                fontSize: 14,
+                                marginLeft: 75,
+                                bottom: 15,
+                                right: 5,
+                              }}>
+                              {itm.price}
+                            </Text>
+                          </View>
+                        </ImageBackground>
+                      </View>
                     </View>
-                    <Text
-                      style={{
-                        color: '#FF7F50',
-                        fontFamily: 'bariol_regular-webfont',
-                        fontSize: 20,
-                        marginTop: 10,
-                        marginBottom: 13,
-                      }}>
-                      {itm.price}
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      marginBottom: 11,
-                      //marginRight: 10,
-                      position: 'absolute',
-                      right: 10,
-                      bottom: 0,
-                    }}>
-                    <Image
-                      style={{height: 10.57, width: 10.57}}
-                      source={itm.img2}
-                    />
-                    <Text
-                      style={{
-                        color: '#98817b',
-                        fontFamily: 'bariol_regular-webfont',
-                        fontSize: 14,
-                        marginRight: 10,
-                        // marginLeft: 2,
-                        bottom: 2,
-                      }}>
-                      {itm.time}
-                    </Text>
-                  </View>
-                </View>
-              </TouchableNativeFeedback>
-            ))}
+                  ) : (
+                    <View style={styles.box}>
+                      <View
+                        style={{
+                          marginLeft: 9,
+                          marginBottom: 9,
+                          marginTop: 9,
+                          zIndex: 1,
+                        }}>
+                        <Image
+                          source={{uri: itm.img[0]}}
+                          style={{height: 70, width: 70}}
+                        />
+                      </View>
+
+                      <View style={styles.listtext}>
+                        <View style={{marginTop: 10}}>
+                          <Text
+                            style={{
+                              color: '#98817b',
+                              fontFamily: 'bariol_regular-webfont',
+                              fontSize: 20,
+                              // width: 300,
+                              //marginTop: 10,
+                            }}>
+                            {itm.name}
+                          </Text>
+                          <Text
+                            style={{
+                              color: '#98817b',
+                              fontFamily: 'bariol_regular-webfont',
+                              fontSize: 14,
+                            }}>
+                            {itm.loc}
+                          </Text>
+                        </View>
+                        <Text
+                          style={{
+                            color: '#FF7F50',
+                            fontFamily: 'bariol_regular-webfont',
+                            fontSize: 20,
+                            marginTop: 10,
+                            marginBottom: 13,
+                          }}>
+                          {itm.price}
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          marginBottom: 11,
+                          //marginRight: 10,
+                          position: 'absolute',
+                          right: 10,
+                          bottom: 0,
+                        }}>
+                        <Image
+                          style={{height: 10.57, width: 10.57}}
+                          source={require('../assets/images/time_ICN.png')}
+                        />
+                        <Text
+                          style={{
+                            color: '#98817b',
+                            fontFamily: 'bariol_regular-webfont',
+                            fontSize: 14,
+                            marginRight: 10,
+                            // marginLeft: 2,
+                            bottom: 2,
+                          }}>
+                          {itm?.time}
+                        </Text>
+                      </View>
+                    </View>
+                  )}
+                </TouchableNativeFeedback>
+              ))}
+            </View>
+          ) : (
+            <View
+              style={{
+                height: Dimensions.get('window').height,
+                width: Dimensions.get('window').width,
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{marginBottom: 200}}>no content available.</Text>
+            </View>
+          )}
         </ImageBackground>
       </ScrollView>
     </SafeAreaView>
