@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Swiper from 'react-native-swiper';
 
 import {
@@ -13,26 +13,10 @@ import {
   ImageBackground,
   TouchableNativeFeedback,
   Linking,
+  ToastAndroid,
 } from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-const arr = [
-  {
-    img: require('../assets/images/speaker2.jpg'),
-    amount: ' \t\t \u20B9 \n45000',
-  },
-  {
-    img: require('../assets/images/phantom.jpg'),
-    amount: '\t\t \u20B9 \n45000',
-  },
-  {
-    img: require('../assets/images/phantom2.jpg'),
-    amount: '\t\t \u20B9 \n45000',
-  },
-  {
-    img: require('../assets/images/phantom3.jpg'),
-    amount: '\t\t \u20B9 \n45000',
-  },
-];
+import firestore from '@react-native-firebase/firestore';
 
 const App = ({
   navigation,
@@ -40,6 +24,44 @@ const App = ({
     params: {data},
   },
 }) => {
+  const [favList, setFavList] = useState([]);
+  const [isInFavList, setIsInFavList] = useState(false);
+  useEffect(() => {
+    const subscription = firestore()
+      .collection('fav')
+      .onSnapshot((usersCollection) => {
+        const dt = usersCollection.docs[0].data()?.data;
+        // console.warn(data);
+        setFavList(dt);
+        const isFav =
+          dt.filter((itm) => {
+            if (itm.name === data.name) {
+              return itm;
+            }
+          }).length !== 0;
+        setIsInFavList(isFav);
+      });
+    return () => subscription();
+  }, []);
+
+  const addToFavList = () => {
+    const temp = isInFavList
+      ? favList.filter((itm) => {
+          if (itm.name !== data.name) return itm;
+        })
+      : favList;
+    !isInFavList && temp.push(data);
+    firestore()
+      .collection('fav')
+      .doc('favs')
+      .update({data: temp})
+      .then(() => {
+        // console.warn('favs updated!');
+        alert(isInFavList ? 'Removed from favourite' : 'Added to favourite');
+      })
+      .catch((e) => {});
+  };
+
   return (
     <View style={{flex: 1}}>
       <View style={styles.head}>
@@ -88,17 +110,25 @@ const App = ({
               }}
               source={require('../assets/images/mapview_normal_icn.png')}></Image>
           </TouchableNativeFeedback>
-          <Image
-            style={{
-              height: 19,
-              width: 21,
-              paddingRight: 10,
-              marginTop: 33,
-              marginBottom: 13,
-              alignSelf: 'flex-end',
-              marginLeft: 14,
-            }}
-            source={require('../assets/images/fav_normal_icn.png')}></Image>
+
+          <TouchableNativeFeedback onPress={addToFavList}>
+            <Image
+              style={{
+                height: 19,
+                width: 21,
+                paddingRight: 10,
+                marginTop: 33,
+                marginBottom: 13,
+                alignSelf: 'flex-end',
+                marginLeft: 14,
+              }}
+              source={
+                isInFavList
+                  ? require('../assets/images/fav_active_icn.png')
+                  : require('../assets/images/fav_normal_icn.png')
+              }
+            />
+          </TouchableNativeFeedback>
         </View>
       </View>
       <ScrollView style={{backgroundColor: '#fff'}}>
@@ -128,12 +158,13 @@ const App = ({
                 }}>
                 <ImageBackground
                   source={{uri: itm}}
-                  style={{height: 200, width: '100%'}}>
+                  style={{height: '100%', width: '100%'}}
+                  resizeMode={'stretch'}>
                   <View
                     style={{
                       position: 'absolute',
                       right: 10,
-                      bottom: 30,
+                      bottom: 20,
                       // paddingLeft: 280,
                     }}>
                     <Text
@@ -143,14 +174,15 @@ const App = ({
                         fontSize: 13,
                         borderRadius: 25,
                         paddingTop: 10,
-                        paddingLeft: 5,
                         width: 50,
                         height: 50,
                         backgroundColor: 'rgba(0,0,0,0.6)',
                         borderWidth: 2,
                         borderColor: 'rgba(156,156,156,0.27)',
+                        textAlign: 'center',
                       }}>
-                      ₹{data.price}
+                      ₹{'\n'}
+                      {data.price}
                     </Text>
                   </View>
                 </ImageBackground>
@@ -167,29 +199,27 @@ const App = ({
           <Text style={styles.small}>product title</Text>
           <Text style={styles.big}>{data.name}</Text>
           <Text style={styles.small}>{'\n'}category</Text>
-          <Text style={styles.big}>electronics</Text>
+          <Text style={styles.big}>{data.category}</Text>
           <Text style={styles.small}>{'\n'}sub category</Text>
-          <Text style={styles.big}>speakers</Text>
+          <Text style={styles.big}>{data.subCategory}</Text>
           <Text style={styles.small}>{'\n'}seller type</Text>
-          <Text style={styles.big}>agent</Text>
+          <Text style={styles.big}>{data.sellerType}</Text>
           <Text style={styles.small}>{'\n'}description</Text>
-          <Text style={styles.big}>
-            audioengine speakers with superb sound imaging and quality
-          </Text>
+          <Text style={styles.big}>{data.desc}</Text>
           <Text style={styles.small}>{'\n'}price</Text>
-          <Text style={styles.big}>45000</Text>
+          <Text style={styles.big}>{data.price}</Text>
           <Text style={styles.small}>{'\n'}negotiable</Text>
-          <Text style={styles.big}>yes</Text>
+          <Text style={styles.big}>{data.negotiable ? 'Yes' : 'No'}</Text>
           <Text style={styles.small}>{'\n'}featured product</Text>
-          <Text style={styles.big}>no</Text>
+          <Text style={styles.big}>{data.featured ? 'Yes' : 'No'}</Text>
           <Text style={styles.small}>{'\n'}location</Text>
-          <Text style={styles.big}>kochi, kerala</Text>
+          <Text style={styles.big}>{data.loc}</Text>
           <Text style={styles.small}>{'\n'}contact person</Text>
-          <Text style={styles.big}>mahesh sivasankaran</Text>
+          <Text style={styles.big}>{data.sellerName}</Text>
           <Text style={styles.small}>{'\n'}email id</Text>
-          <Text style={styles.big}>maheshs@qburst.com</Text>
+          <Text style={styles.big}>{data.email}</Text>
           <Text style={styles.small}>{'\n'}contact number</Text>
-          <Text style={styles.big}>+91 989506624</Text>
+          <Text style={styles.big}>{data.phone}</Text>
         </View>
       </ScrollView>
       <ImageBackground
@@ -220,7 +250,7 @@ const App = ({
             }}>
             <TouchableNativeFeedback
               onPress={() => {
-                Linking.openURL('tel:+9526349772');
+                Linking.openURL('tel:' + data?.phone);
               }}>
               <Image
                 style={{height: 70, width: 70, marginLeft: 20}}

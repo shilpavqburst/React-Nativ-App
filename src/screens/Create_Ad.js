@@ -57,8 +57,8 @@ const catSelect = [
 ];
 
 const subCatSelect = {
-  mobile: ['samsung'],
-  realestate: ['ernakulam'],
+  mobile: ['samsung', 'redmi'],
+  ['real estate']: ['ernakulam', 'trivandrum'],
   electronics: [
     'audio players',
     'computer/laptops',
@@ -70,7 +70,7 @@ const subCatSelect = {
     'calculator',
     'headphones',
   ],
-  leisure: ['fishing'],
+  leisure: ['fishing', 'cycling'],
   appliances: ['tv'],
   automotive: ['car'],
   pets: ['dog'],
@@ -184,7 +184,12 @@ const Create_Ad = ({navigation}) => {
                       source={{uri: itm}}>
                       <TouchableOpacity
                         onPress={() => {
-                          console.warn('ss');
+                          let temp = item;
+                          temp.img = item.img.filter((elm) => {
+                            if (elm !== itm) return elm;
+                          });
+                          console.warn(temp.img);
+                          setItem({...temp});
                         }}>
                         <Icon
                           name="times-circle"
@@ -201,7 +206,6 @@ const Create_Ad = ({navigation}) => {
             </View>
           </ImageBackground>
         </View>
-
         <TextInput
           placeholder="product title"
           value={item.name}
@@ -242,6 +246,7 @@ const Create_Ad = ({navigation}) => {
           placeholder="price"
           style={styles.TextInputStyleClass}
           value={item.price}
+          keyboardType="numeric"
           onChangeText={(text) => onItemValueChange(text, 'price')}
         />
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -291,6 +296,8 @@ const Create_Ad = ({navigation}) => {
           placeholder="contact number"
           style={styles.TextInputStyleClass}
           value={item.phone}
+          keyboardType="numeric"
+          maxLength={10}
           onChangeText={(text) => onItemValueChange(text, 'phone')}
         />
         <TouchableNativeFeedback onPress={navigTo}>
@@ -343,7 +350,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 22,
     marginLeft: 30,
-    height: 40,
+    height: 44,
     //width: wp(45),
     borderWidth: 1,
     borderColor: '#f3e6df',
@@ -366,7 +373,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 22,
     marginLeft: 30,
-    height: 40,
+    height: 44,
     //width: '85%',
     borderWidth: 0.1,
     top: 20,

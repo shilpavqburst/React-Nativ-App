@@ -113,52 +113,65 @@ const App = ({
         />
       )}
 
-      <ScrollView
-        style={{backgroundColor: '#e8e8e8'}}
-        contentContainerStyle={{
-          flexDirection: 'column',
-          flexWrap: 'wrap',
-        }}>
-        {list.map((itm, indx) => (
-          <TouchableNativeFeedback onPress={() => onOpenitems(indx)}>
-            <View style={styles.box}>
-              <View style={{flexDirection: 'row'}}>
-                <View
-                  style={{
-                    width: 50,
-                    height: 50,
-                    borderRightWidth: 0.5,
-                    borderColor: 'rgba(242,242,242,1)',
-                    justifyContent: 'center',
-                  }}>
-                  <Image source={arr[indx]} style={{}} />
+      <ImageBackground
+        style={{
+          height: '100%',
+          width: '100%',
+          // zIndex: -10,
+          //position: 'absolute',
+        }}
+        source={require('../assets/images/bg.png')}>
+        <ScrollView
+          contentContainerStyle={{
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+          }}>
+          {list.map((itm, indx) => (
+            <TouchableNativeFeedback onPress={() => onOpenitems(indx)}>
+              <View style={styles.box}>
+                <View style={{flexDirection: 'row'}}>
+                  <View
+                    style={{
+                      width: 50,
+                      height: 50,
+                      borderRightWidth: 0.5,
+                      borderColor: 'rgba(242,242,242,1)',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      alignSelf: 'center',
+                      paddingRight: 20,
+                    }}>
+                    <Image source={arr[indx]} style={{}} />
+                  </View>
+                  <View style={{width: 200, padding: 15}}>
+                    <Text
+                      style={{
+                        color: '#98817b',
+                        fontFamily: 'bariol_regular-webfont',
+                        fontSize: 20,
+                      }}>
+                      {itm.subCatName}
+                    </Text>
+                    <Text
+                      style={{
+                        color: '#98817b',
+                        fontFamily: 'bariol_regular-webfont',
+                        fontSize: 14,
+                      }}>
+                      {itm.items.length} items
+                    </Text>
+                  </View>
                 </View>
-                <View style={{width: 200, padding: 15}}>
-                  <Text
-                    style={{
-                      color: '#98817b',
-                      fontFamily: 'bariol_regular-webfont',
-                      fontSize: 20,
-                    }}>
-                    {itm.subCatName}
-                  </Text>
-                  <Text
-                    style={{
-                      color: '#98817b',
-                      fontFamily: 'bariol_regular-webfont',
-                      fontSize: 14,
-                    }}>
-                    {itm.items.length} items
-                  </Text>
+                <View style={{}}>
+                  <Image
+                    source={require('../assets/images/listarrow_icn.png')}
+                  />
                 </View>
               </View>
-              <View style={{}}>
-                <Image source={require('../assets/images/listarrow_icn.png')} />
-              </View>
-            </View>
-          </TouchableNativeFeedback>
-        ))}
-      </ScrollView>
+            </TouchableNativeFeedback>
+          ))}
+        </ScrollView>
+      </ImageBackground>
     </SafeAreaView>
   );
 };
@@ -183,7 +196,7 @@ const styles = StyleSheet.create({
   },
   box: {
     width: '100%',
-    height: 65,
+    height: 60,
     alignItems: 'center',
     margin: 0.5,
     backgroundColor: '#FFFFFF',
@@ -194,6 +207,7 @@ const styles = StyleSheet.create({
     // alignSelf: 'flex-end',
     marginRight: 20,
     justifyContent: 'space-between',
+    marginBottom: 1,
   },
 });
 

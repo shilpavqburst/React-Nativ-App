@@ -9,7 +9,13 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const DropComponent = ({list, selectedValue, onSelectValue}) => {
+const DropComponent = ({
+  list,
+  selectedValue,
+  onSelectValue,
+  style,
+  textStyle,
+}) => {
   const [showDropList, setShowDropList] = useState(false);
 
   const onSelect = (value) => {
@@ -18,11 +24,14 @@ const DropComponent = ({list, selectedValue, onSelectValue}) => {
   };
   return (
     <View
-      style={{
-        zIndex: 10,
-        height: 'auto',
-        marginHorizontal: 30,
-      }}>
+      style={[
+        {
+          zIndex: 10,
+          height: 'auto',
+          marginHorizontal: 30,
+        },
+        style && style,
+      ]}>
       <TouchableWithoutFeedback
         onPress={() => {
           setShowDropList(!showDropList);
@@ -31,7 +40,7 @@ const DropComponent = ({list, selectedValue, onSelectValue}) => {
           style={{
             overflow: 'hidden',
           }}>
-          <Text style={[styles.TextInputStyleClass, {fontSize: 22}]}>
+          <Text style={[styles.TextInputStyleClass, textStyle && textStyle]}>
             {selectedValue == '' ? 'Select' : selectedValue}
           </Text>
           <Icon

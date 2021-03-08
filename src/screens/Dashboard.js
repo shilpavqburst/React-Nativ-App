@@ -16,7 +16,6 @@ import {
   Dimensions,
   FlatList,
 } from 'react-native';
-import {Header} from 'react-native/Libraries/NewAppScreen';
 import firestore from '@react-native-firebase/firestore';
 const {height, width} = Dimensions.get('screen');
 const arr = [
@@ -142,6 +141,8 @@ const styles = StyleSheet.create({
     width: 41,
     height: 41,
     justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
   },
 });
 

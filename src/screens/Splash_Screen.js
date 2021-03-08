@@ -26,7 +26,6 @@ export default class Splash_Screen extends Component {
           <Image
             source={require('../assets/images/bg.png')}
             resizeMode="cover"
-            style={styles.backdrop}
             style={{width: '100%', height: '100%'}}
           />
         </View>
@@ -56,6 +55,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: '100%',
+    alignSelf: 'center',
   },
 
   SplashScreen_ChildView: {

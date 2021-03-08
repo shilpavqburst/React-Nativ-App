@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
 import SearchBar from 'react-native-dynamic-search-bar';
 import {
   SafeAreaView,
@@ -6,97 +8,47 @@ import {
   ScrollView,
   View,
   Text,
-  Link,
-  TextInput,
   StatusBar,
   Image,
-  ImageBackground,
-  Button,
-  TouchableOpacity,
   TouchableNativeFeedback,
+  TouchableOpacity,
+  ImageBackground,
+  Dimensions,
 } from 'react-native';
-import {Header} from 'react-native/Libraries/NewAppScreen';
-import {set} from 'react-native-reanimated';
+import firestore from '@react-native-firebase/firestore';
 
-const arr = [
-  {
-    title: 'puma white leather bag',
-    img: require('../assets/images/bag.jpg'),
-    basetext: 'kochi, kerala',
-    price: '\u20B9 12000',
-    img2: require('../assets/images/time_ICN2.png'),
-    time: '\t07:30 pm',
-  },
-
-  {
-    title: 'diamond ring with platinum',
-    img: require('../assets/images/ring.jpg'),
-    basetext: 'kochi, kerala',
-    price: '\u20B9 13500',
-    img2: require('../assets/images/time_ICN1.png'),
-    time: '\t09:30 pm',
-  },
-  {
-    title: 'ghostly enemelware mug',
-    img: require('../assets/images/mug.jpg'),
-    basetext: 'alzoor, karnataka',
-    price: '\u20B9 75000',
-    img2: require('../assets/images/time_ICN.png'),
-    time: '\t10:00 pm',
-  },
-  {
-    title: 'audio engine - xb03',
-    img: require('../assets/images/speaker7.jpg'),
-    basetext: 'kochi, kerala',
-    price: '\u20B9 45000',
-    img2: require('../assets/images/date_ICN1.png'),
-    time: '\t28/06/16',
-  },
-  {
-    title: 'movado circa analogue watch',
-    img: require('../assets/images/watch.jpg'),
-    basetext: 'kochi, kerala',
-    price: '\u20B9 9500',
-    img2: require('../assets/images/date_ICN.png'),
-    time: '\t28/06/16',
-  },
-  {
-    title: 'apple m2xc/a usb cable',
-    img: require('../assets/images/headphone.jpg'),
-    basetext: 'kochi, kerala',
-    price: '\u20B9 12000',
-    img2: require('../assets/images/time_ICN.png'),
-    time: '\t07:00 pm',
-  },
-  {
-    title: 'earbuds bts',
-    img: require('../assets/images/earbuds.jpg'),
-    basetext: 'kochi, kerala',
-    price: '\u20B9 50000',
-    img2: require('../assets/images/time_ICN.png'),
-    time: '\t10:00 pm',
-  },
-];
-
-const Favourite = () => {
+const Favourites = ({navigation}) => {
+  const [data, setFavList] = useState([]);
+  useEffect(() => {
+    const subscription = firestore()
+      .collection('fav')
+      .onSnapshot((usersCollection) => {
+        const {data} = usersCollection.docs[0].data();
+        // console.warn(data);
+        setFavList(data);
+        setList(data);
+      });
+    return () => subscription();
+  }, []);
   const [showSearchBar, setSearchBar] = useState(false);
+  const [grid, setGrid] = useState(false);
   const [searchText, setSearchText] = useState('');
-  const [list, setList] = useState(arr);
+  const [list, setList] = useState(data);
   const onClick = () => {
     setSearchBar(!showSearchBar);
     if (showSearchBar) {
       setSearchText('');
-      setList(arr);
+      setList(data);
     }
   };
 
   const onSearch = (text) => {
     setSearchText(text);
     if (text === '') {
-      setList(arr);
+      setList(data);
     } else {
       const temp = list.filter((itm) => {
-        if (itm.title.toLowerCase().indexOf(text.toLowerCase()) > -1)
+        if (itm?.name?.toLowerCase().indexOf(text?.toLowerCase()) > -1)
           return itm;
       });
       setList(temp);
@@ -104,33 +56,53 @@ const Favourite = () => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <StatusBar barStyle="dark-content" />
+    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+      <Image
+        style={{
+          height: '100%',
+          width: '100%',
+          zIndex: -10,
+          position: 'absolute',
+        }}
+        source={require('../assets/images/bg.png')}
+      />
+
       <View style={styles.head}>
-        <View />
+        <TouchableNativeFeedback
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Image
+            style={{
+              height: 18,
+              width: 10,
+              marginLeft: '3%',
+              marginTop: 33,
+              marginBottom: 12.97,
+            }}
+            source={require('../assets/images/titlebar_back_arrow.png')}></Image>
+        </TouchableNativeFeedback>
         <Text
           style={{
             fontFamily: 'bariol_regular-webfont',
             fontSize: 30,
             color: 'rgba(255,121,86,1)',
-            // marginLeft: 130,
-            marginBottom: 12.97,
             marginTop: 33,
+            marginBottom: 12.97,
           }}>
-          favourites
+          Favourites
         </Text>
         <View>
           <TouchableOpacity onPress={onClick}>
             <Image
               style={{
-                height: 18.03,
-                width: 18.03,
-                marginRight: 9.97,
+                height: 19,
+                width: 19,
+                marginRight: '3%',
                 marginTop: 33,
                 marginBottom: 12.97,
               }}
-              source={require('../assets/images/search_lens.png')}
-            />
+              source={require('../assets/images/search_lens.png')}></Image>
           </TouchableOpacity>
         </View>
       </View>
@@ -142,94 +114,115 @@ const Favourite = () => {
           onChangeText={onSearch}
         />
       )}
+
       <ScrollView
-        style={{backgroundColor: '#e8e8e8'}}
+        // style={{backgroundColor: '#e8e8e8'}}
         contentContainerStyle={{
-          flexWrap: 'wrap',
+          flexDirection: 'column',
+          //flexWrap: 'wrap',
+          // top: 50,
         }}>
-        {list.map((itm, indx) => (
-          <View style={styles.box}>
-            <View
-              style={{
-                width: 50,
-                height: 50,
-                justifyContent: 'center',
-              }}>
-              <Image
-                source={itm.img}
-                style={{
-                  height: 70,
-                  width: 70,
-                  marginLeft: 9,
-                  paddingRight: 10,
-                }}
-              />
-            </View>
-
-            <View
-              style={{
-                //width: '70%',
-                // paddingLeft: '10%',
-                marginTop: 10,
-                marginLeft: 40,
-              }}>
-              <View style={{marginTop: 8}}>
-                <Text
-                  style={{
-                    color: '#98817b',
-                    fontFamily: 'bariol_regular-webfont',
-                    fontSize: 20,
-                  }}>
-                  {itm.title}
-                </Text>
-                <Text
-                  style={{
-                    color: '#98817b',
-                    fontFamily: 'bariol_regular-webfont',
-                    fontSize: 14,
-                  }}>
-                  {itm.basetext}
-                </Text>
-              </View>
-              <View>
-                <Text
-                  style={{
-                    color: '#FF7F50',
-                    fontFamily: 'bariol_regular-webfont',
-                    fontSize: 20,
-                    marginBottom: 13,
-                    marginTop: 10,
-                  }}>
-                  {itm.price}
-                </Text>
-              </View>
-            </View>
-
-            <View
-              style={{
-                flexDirection: 'row',
-                // marginTop: 60,
-                marginBottom: 11,
-                // justifyContent: 'flex-start',
-                position: 'absolute',
-                right: 10,
-                bottom: -5,
-                //marginTop: 61,
-              }}>
-              <Image style={{}} source={itm.img2} />
-              <Text
-                style={{
-                  bottom: 2,
-                  color: '#98817b',
-                  fontFamily: 'bariol_regular-webfont',
-                  fontSize: 14,
-                  //bottom: 2,
+        {list.length !== 0 ? (
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'space-evenly',
+            }}>
+            {list.map((itm, indx) => (
+              <TouchableNativeFeedback
+                key={indx}
+                onPress={() => {
+                  navigation.navigate('Audio engine', {data: itm});
                 }}>
-                {itm.time}
-              </Text>
-            </View>
+                <View style={styles.box}>
+                  <View
+                    style={{
+                      marginLeft: 9,
+                      marginBottom: 9,
+                      marginTop: 9,
+                      zIndex: 1,
+                    }}>
+                    <Image
+                      source={{uri: itm.img[0]}}
+                      style={{height: 70, width: 70}}
+                    />
+                  </View>
+
+                  <View style={styles.listtext}>
+                    <View style={{marginTop: 10}}>
+                      <Text
+                        style={{
+                          color: '#98817b',
+                          fontFamily: 'bariol_regular-webfont',
+                          fontSize: 20,
+                          // width: 300,
+                          //marginTop: 10,
+                        }}>
+                        {itm.name}
+                      </Text>
+                      <Text
+                        style={{
+                          color: '#98817b',
+                          fontFamily: 'bariol_regular-webfont',
+                          fontSize: 16,
+                          top: 1,
+                        }}>
+                        {itm.loc}
+                      </Text>
+                    </View>
+                    <Text
+                      style={{
+                        color: '#FF7F50',
+                        fontFamily: 'bariol_regular-webfont',
+                        fontSize: 20,
+                        marginTop: 8,
+                        marginBottom: 13,
+                      }}>
+                      ₹ {itm.price}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      marginBottom: 11,
+                      //marginRight: 10,
+                      position: 'absolute',
+                      right: 10,
+                      bottom: 0,
+                    }}>
+                    <Image
+                      style={{height: 10.57, width: 10.57, right: 2}}
+                      source={require('../assets/images/date_ICN.png')}
+                    />
+                    <Text
+                      style={{
+                        color: '#98817b',
+                        fontFamily: 'bariol_regular-webfont',
+                        fontSize: 14,
+                        marginRight: 10,
+                        marginLeft: 2,
+                        bottom: 2,
+                      }}>
+                      {itm?.time}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableNativeFeedback>
+            ))}
           </View>
-        ))}
+        ) : (
+          <View
+            style={{
+              height: Dimensions.get('window').height,
+              width: Dimensions.get('window').width,
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{marginBottom: 200}}>no content available.</Text>
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -247,7 +240,6 @@ const styles = StyleSheet.create({
     height: 64,
     width: '100%',
     alignItems: 'center',
-
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderBottomWidth: 1,
@@ -262,7 +254,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // padding: 10,
     borderColor: '#FFFFFF',
+    zIndex: 1,
+  },
+
+  gridbox: {
+    width: 174,
+    height: 174,
+    alignItems: 'center',
+    marginTop: 15,
+    //backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+  listtext: {marginLeft: 10},
+  gridtext: {
+    paddingLeft: 45,
+    backgroundColor: '#1d1d1d',
+    marginTop: 145,
+    height: 40,
+    justifyContent: 'space-between',
   },
 });
 
-export default Favourite;
+export default Favourites;

@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import auth from '@react-native-firebase/auth';
+import PasswordInputText from 'react-native-hide-show-password-input';
 import {
   SafeAreaView,
   StyleSheet,
@@ -57,6 +58,7 @@ const Sign_in = ({navigation}) => {
           placeholder="password"
           placeholderTextColor="rgba(162,134,128,1)"
           style={styles.TextInputStyleClass}
+          secureTextEntry
           onChangeText={(text) => {
             setPass(text);
           }}
@@ -83,7 +85,7 @@ const Sign_in = ({navigation}) => {
             flexDirection: 'row',
             alignItems: 'center',
             //width: 320,
-            marginTop: 36,
+            marginTop: 48,
             marginRight: 30,
             marginLeft: 30,
             justifyContent: 'space-between',
@@ -95,6 +97,7 @@ const Sign_in = ({navigation}) => {
                 color: 'rgba(162,134,128,1)',
                 fontSize: 16,
                 fontFamily: 'bariol_regular-webfont',
+                marginTop: -5,
               }}>
               {' '}
               or{' '}
@@ -189,7 +192,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingBottom: 11,
     paddingTop: 11,
-    marginTop: 76,
+    marginTop: 80,
   },
   button: {
     fontSize: 20,
@@ -198,7 +201,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     justifyContent: 'center',
     paddingVertical: 10,
-    marginTop: 75,
+    marginTop: 80,
     borderRadius: 22,
     backgroundColor: '#FF7F50',
     height: 44,

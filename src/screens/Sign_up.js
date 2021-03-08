@@ -121,6 +121,8 @@ const App = ({navigation}) => {
         />
         <TextInput
           placeholder="mobile number"
+          keyboardType="numeric"
+          maxLength={10}
           placeholderTextColor="rgba(162,134,128,1)"
           style={styles.TextInputStyleClass}
         />
